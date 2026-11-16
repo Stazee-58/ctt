@@ -1,0 +1,1825 @@
+/* ============================================================
+   STYLE.CSS - Giao Diện & Hiệu Ứng Sổ Kỷ Niệm 11A2
+   Tri Ân Thầy Long - Niên Khóa 2026–2027
+   ============================================================ */
+
+/* ============================================================
+   1. DESIGN TOKENS & COLOR PALETTES
+   ============================================================ */
+:root {
+  /* Desk & Wood Materials */
+  --desk-base: #2a1506;
+  --desk-surface: #41240f;
+  --desk-dark: #160a02;
+  --wood-bark: #5f3414;
+  --wood-grain: #7b451b;
+  
+  /* Paper & Parchment */
+  --paper-cream: #fbf5e8;
+  --paper-aged: #f1e2c7;
+  --paper-shadow: rgba(43, 21, 6, 0.16);
+  --paper-rule: rgba(142, 98, 59, 0.12);
+  
+  /* Gold & Illumination */
+  --gold-primary: #d4a339;
+  --gold-bright: #fce18b;
+  --gold-glow: rgba(252, 225, 139, 0.45);
+  --gold-dark: #8c6316;
+  
+  /* Botanical Greens */
+  --foliage-deep: #1b4213;
+  --foliage-mid: #386f26;
+  --foliage-light: #61a63c;
+  --foliage-sun: #96dd58;
+  
+  /* Typography Colors */
+  --text-main: #2c1a0e;
+  --text-muted: #5e432d;
+  --text-light: #8b6b4e;
+  
+  /* Physics & Transitions */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Đêm Đom Đóm (Night Mode) */
+body.night-mode {
+  --desk-base: #080c16;
+  --desk-surface: #0f172a;
+  --desk-dark: #04060a;
+  
+  --paper-cream: #182236;
+  --paper-aged: #121a2b;
+  --paper-shadow: rgba(0, 0, 0, 0.65);
+  --paper-rule: rgba(100, 149, 237, 0.15);
+  
+  --gold-primary: #70b8ff;
+  --gold-bright: #b8e2ff;
+  --gold-glow: rgba(112, 184, 255, 0.5);
+  --gold-dark: #3b76b8;
+  
+  --text-main: #f0f6fc;
+  --text-muted: #9bb0c9;
+  --text-light: #6b84a3;
+}
+
+/* ============================================================
+   2. RESET & FOUNDATIONS
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--desk-base);
+  color: var(--text-main);
+  font-family: 'Quicksand', sans-serif;
+  overflow-x: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 1.2s var(--ease-smooth);
+}
+
+/* Rich Desk Background with Vignette & Subtle Woodgrain */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 50% 38%, rgba(255, 236, 179, 0.18) 0%, transparent 68%),
+    radial-gradient(ellipse at center, transparent 40%, rgba(10, 4, 1, 0.82) 100%),
+    repeating-linear-gradient(85deg, transparent, transparent 4px, rgba(0, 0, 0, 0.04) 4px, rgba(0, 0, 0, 0.04) 7px);
+  pointer-events: none;
+  z-index: 0;
+  transition: opacity 1.2s ease;
+}
+
+body.night-mode::before {
+  background-image:
+    radial-gradient(circle at 50% 35%, rgba(64, 128, 255, 0.18) 0%, transparent 70%),
+    radial-gradient(ellipse at center, transparent 35%, rgba(2, 4, 8, 0.9) 100%),
+    radial-gradient(2px 2px at 20% 15%, rgba(255, 255, 255, 0.7) 0%, transparent 100%),
+    radial-gradient(2px 2px at 80% 30%, rgba(255, 255, 255, 0.8) 0%, transparent 100%),
+    radial-gradient(3px 3px at 50% 8%, rgba(255, 255, 255, 0.9) 0%, transparent 100%);
+}
+
+/* Ambient Floating Dust Motes */
+.ambient-dust {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.dust-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 240, 180, 0.85) 0%, rgba(255, 215, 0, 0) 70%);
+  pointer-events: none;
+  animation: dustFloat linear infinite;
+}
+
+@keyframes dustFloat {
+  0% { transform: translate(0, 0); opacity: 0; }
+  25% { opacity: 0.75; }
+  75% { opacity: 0.5; }
+  100% { transform: translate(25px, -110px); opacity: 0; }
+}
+
+/* ============================================================
+   3. TOP NAVIGATION BAR
+   ============================================================ */
+.top-nav {
+  position: fixed;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(94%, 960px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  background: rgba(30, 15, 6, 0.65);
+  border: 1px solid rgba(212, 163, 57, 0.35);
+  border-radius: 40px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+  z-index: 100;
+  transition: all 0.4s var(--ease-smooth);
+}
+
+body.night-mode .top-nav {
+  background: rgba(15, 23, 42, 0.75);
+  border-color: rgba(112, 184, 255, 0.4);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.65);
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.badge-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--gold-bright);
+  box-shadow: 0 0 10px var(--gold-glow);
+  animation: pulseDot 2s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+  0%, 100% { transform: scale(0.9); opacity: 0.7; }
+  50% { transform: scale(1.3); opacity: 1; }
+}
+
+.brand-title {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--gold-bright);
+  letter-spacing: 0.5px;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(212, 163, 57, 0.4);
+  border-radius: 20px;
+  color: var(--gold-bright);
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s var(--ease-spring);
+}
+
+.nav-pill:hover {
+  background: rgba(212, 163, 57, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--gold-glow);
+}
+
+.nav-pill:active {
+  transform: translateY(0) scale(0.97);
+}
+
+/* ============================================================
+   4. 3D INTRO BOOK OPENING SEQUENCE
+   ============================================================ */
+#intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: radial-gradient(ellipse at center, #1b0e04 0%, #070301 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 1.2s var(--ease-smooth);
+}
+
+#intro-overlay.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.intro-ambient-light {
+  position: absolute;
+  width: 500px;
+  height: 380px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(252, 225, 139, 0.2) 0%, transparent 68%);
+  filter: blur(48px);
+  animation: breatheLight 4.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes breatheLight {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.15); opacity: 0.95; }
+}
+
+.intro-book-wrapper {
+  perspective: 1600px;
+  z-index: 2;
+}
+
+.book-3d {
+  width: 380px;
+  height: 250px;
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.book-cover {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #44240d 0%, #2a1406 50%, #44240d 100%);
+  border-radius: 4px 18px 18px 4px;
+  border-left: 12px solid #1c0d04;
+  box-shadow:
+    14px 16px 45px rgba(0, 0, 0, 0.85),
+    inset 0 0 50px rgba(0, 0, 0, 0.65);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  transition: transform 1.8s cubic-bezier(0.4, 0, 0.1, 1);
+  cursor: pointer;
+  padding: 24px;
+  text-align: center;
+}
+
+.cover-border-outer {
+  position: absolute;
+  inset: 12px;
+  border: 1.5px solid rgba(212, 163, 57, 0.55);
+  border-radius: 2px 12px 12px 2px;
+  pointer-events: none;
+}
+
+.cover-border-inner {
+  position: absolute;
+  inset: 16px;
+  border: 1px dashed rgba(252, 225, 139, 0.35);
+  border-radius: 2px 10px 10px 2px;
+  pointer-events: none;
+}
+
+.book-cover.opening {
+  transform: perspective(1600px) rotateY(-178deg);
+}
+
+.cover-crest {
+  margin-bottom: 8px;
+}
+
+.cover-subtitle {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--gold-bright);
+  text-transform: uppercase;
+}
+
+.cover-title {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: #fff6d9;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8), 0 0 20px rgba(252, 225, 139, 0.5);
+  line-height: 1.2;
+  margin: 4px 0;
+}
+
+.cover-divider {
+  font-size: 0.8rem;
+  color: var(--gold-primary);
+  margin: 4px 0 8px;
+}
+
+.cover-tagline {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.cover-cta {
+  margin-top: 14px;
+  font-size: 0.8rem;
+  font-style: italic;
+  color: var(--gold-bright);
+  animation: pulseCta 2s ease-in-out infinite;
+}
+
+@keyframes pulseCta {
+  0%, 100% { opacity: 0.6; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-2px); }
+}
+
+#skip-btn {
+  position: absolute;
+  bottom: 30px;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 30px;
+  padding: 8px 22px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.85rem;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+#skip-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* ============================================================
+   5. MAIN STAGE & HARDCOVER ALBUM
+   ============================================================ */
+.stage-container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 85px 20px 40px;
+  position: relative;
+  z-index: 2;
+}
+
+.album-viewport {
+  perspective: 1600px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.album-case {
+  display: flex;
+  width: min(1040px, 96vw);
+  min-height: 640px;
+  position: relative;
+  border-radius: 6px 20px 20px 6px;
+  background: var(--paper-cream);
+  box-shadow:
+    0 35px 80px rgba(0, 0, 0, 0.6),
+    0 15px 30px rgba(25, 10, 4, 0.35),
+    0 0 0 1px rgba(212, 163, 57, 0.3);
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease-out;
+}
+
+/* Gilded book edge preview */
+.album-case::before {
+  content: '';
+  position: absolute;
+  inset: 6px -5px -6px 5px;
+  border-radius: 4px 22px 22px 4px;
+  background: linear-gradient(135deg, #d4a339, #9c6c18, #fce18b, #9c6c18);
+  z-index: -1;
+}
+
+/* Central Silk Red Bookmark Ribbon */
+.silk-ribbon {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 22px;
+  height: calc(100% + 46px);
+  background: linear-gradient(180deg, #8a0e1b 0%, #c41e3a 70%, #750a14 100%);
+  box-shadow: 2px 6px 16px rgba(0, 0, 0, 0.45);
+  z-index: 30;
+  pointer-events: none;
+  border-radius: 3px 3px 0 0;
+}
+
+.silk-ribbon::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 11px solid transparent;
+  border-right: 11px solid transparent;
+  border-bottom: 14px solid var(--desk-base);
+}
+
+/* Album Spine */
+.album-spine {
+  width: 28px;
+  flex-shrink: 0;
+  background: linear-gradient(to right,
+    #251204 0%,
+    #4a260d 25%,
+    #7a441a 50%,
+    #4a260d 75%,
+    #251204 100%
+  );
+  box-shadow:
+    inset 3px 0 6px rgba(0,0,0,0.4),
+    inset -3px 0 6px rgba(0,0,0,0.4);
+  position: relative;
+  z-index: 5;
+}
+
+.spine-stitching {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    180deg,
+    transparent 0px, transparent 34px,
+    rgba(212, 163, 57, 0.45) 34px, rgba(212, 163, 57, 0.45) 36px
+  );
+}
+
+/* ============================================================
+   6. LEFT PAGE: EDITORIAL SCRAPBOOK
+   ============================================================ */
+.album-page {
+  flex: 1;
+  position: relative;
+  min-height: 640px;
+  padding: 38px 36px 32px;
+  overflow: hidden;
+  transition: background 1.2s ease, color 1.2s ease;
+}
+
+.page-left {
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(255, 255, 255, 0.6) 0%, transparent 60%),
+    repeating-linear-gradient(
+      180deg,
+      transparent 0px, transparent 29px,
+      var(--paper-rule) 29px, var(--paper-rule) 30px
+    ),
+    linear-gradient(135deg, #fdf8ee 0%, var(--paper-cream) 60%, var(--paper-aged) 100%);
+  border-radius: 4px 0 0 4px;
+}
+
+/* Shadow crease near spine */
+.page-left::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 42px;
+  background: linear-gradient(to right, transparent 0%, rgba(46, 24, 8, 0.16) 100%);
+  pointer-events: none;
+}
+
+/* Header Row: School Badge & Meta */
+.page-header-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.school-badge-wrap {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  border: 1.5px solid var(--gold-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 4px 10px rgba(78, 46, 19, 0.2);
+  flex-shrink: 0;
+  transition: transform 0.3s var(--ease-spring);
+}
+
+.school-badge-wrap:hover {
+  transform: rotate(-6deg) scale(1.08);
+}
+
+#school-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.crest-placeholder {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--wood-bark);
+}
+
+.school-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.meta-school {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-main);
+}
+
+.meta-class {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* Letter Heading */
+.letter-heading {
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.script-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 3.4vw, 2.7rem);
+  font-weight: 700;
+  color: #3b200e;
+  line-height: 1.15;
+}
+
+body.night-mode .script-title {
+  color: #e6f1ff;
+}
+
+.letter-ornament {
+  font-size: 0.85rem;
+  color: var(--gold-primary);
+  margin: 4px 0 6px;
+}
+
+.letter-quote {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* Letter Body Prose */
+.letter-body {
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: var(--text-main);
+  margin-bottom: 22px;
+}
+
+.callout-poem {
+  margin: 14px 0;
+  padding: 12px 16px;
+  background: rgba(212, 163, 57, 0.1);
+  border-left: 3px solid var(--gold-primary);
+  border-radius: 0 8px 8px 0;
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.18rem;
+  font-weight: 600;
+  color: #44240d;
+  line-height: 1.45;
+}
+
+body.night-mode .callout-poem {
+  background: rgba(112, 184, 255, 0.12);
+  color: #c9e2ff;
+}
+
+.letter-note {
+  font-size: 0.86rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Keepsakes Scrapbook Gallery */
+.scrapbook-keepsakes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 14px;
+  position: relative;
+}
+
+.keepsake-item {
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s var(--ease-spring), box-shadow 0.3s ease;
+}
+
+/* Washi Tape styling */
+.washi-tape {
+  position: absolute;
+  top: -8px;
+  width: 44px;
+  height: 16px;
+  background: rgba(230, 200, 150, 0.7);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  border-left: 2px dashed rgba(255, 255, 255, 0.5);
+  border-right: 2px dashed rgba(255, 255, 255, 0.5);
+  z-index: 10;
+}
+
+.washi-left {
+  left: 20%;
+  transform: rotate(-5deg);
+}
+
+.washi-right {
+  right: 20%;
+  transform: rotate(4deg);
+}
+
+/* Polaroid Card */
+.polaroid-card {
+  transform: rotate(-2.5deg);
+}
+
+.polaroid-card:hover {
+  transform: rotate(0deg) scale(1.05) translateY(-4px);
+  z-index: 20;
+}
+
+.polaroid-inner {
+  background: #ffffff;
+  padding: 8px 8px 12px;
+  border-radius: 3px;
+  box-shadow: 0 8px 20px rgba(44, 20, 5, 0.25);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.photo-box {
+  width: 100%;
+  height: 95px;
+  background: #ede4d3;
+  overflow: hidden;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.photo-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.polaroid-card:hover .photo-box img {
+  transform: scale(1.08);
+}
+
+.photo-fallback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: var(--wood-bark);
+}
+
+.fallback-icon {
+  font-size: 1.4rem;
+}
+
+.fallback-text {
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.polaroid-caption {
+  font-family: 'Caveat', cursive;
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-align: center;
+  color: #3b200e;
+  margin-top: 6px;
+}
+
+/* Teacher Portrait Card */
+.teacher-card {
+  transform: rotate(2deg);
+}
+
+.teacher-card:hover {
+  transform: rotate(0deg) scale(1.05) translateY(-4px);
+  z-index: 20;
+}
+
+.portrait-inner {
+  background: #ffffff;
+  padding: 8px 8px 12px;
+  border-radius: 3px;
+  box-shadow: 0 8px 20px rgba(44, 20, 5, 0.25);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.portrait-box {
+  width: 100%;
+  height: 95px;
+  background: #ede4d3;
+  overflow: hidden;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.portrait-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.teacher-card:hover .portrait-box img {
+  transform: scale(1.08);
+}
+
+.portrait-caption {
+  font-family: 'Caveat', cursive;
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-align: center;
+  color: #3b200e;
+  margin-top: 6px;
+}
+
+/* Cinema Memory Ticket */
+.cinema-ticket {
+  grid-column: span 2;
+  background: linear-gradient(135deg, #44240d 0%, #2a1406 100%);
+  border: 1px solid var(--gold-primary);
+  border-radius: 8px;
+  padding: 10px 14px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+  margin-top: 4px;
+  transform: rotate(-0.5deg);
+}
+
+.cinema-ticket:hover {
+  transform: scale(1.02) translateY(-2px);
+  box-shadow: 0 8px 24px var(--gold-glow);
+}
+
+.ticket-inner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ticket-stub {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.ticket-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.ticket-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--gold-bright);
+}
+
+.ticket-sub {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 600;
+}
+
+.ticket-play-badge {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--gold-bright);
+  color: #2a1406;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  transition: transform 0.25s var(--ease-spring);
+}
+
+.cinema-ticket:hover .ticket-play-badge {
+  transform: scale(1.15);
+}
+
+.page-bottom-note {
+  text-align: center;
+  margin-top: 22px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--text-light);
+  letter-spacing: 1px;
+}
+
+/* ============================================================
+   7. RIGHT PAGE: BOTANICAL MEMORY TREE SANCTUARY
+   ============================================================ */
+.page-right {
+  background:
+    radial-gradient(ellipse at 80% 20%, rgba(255, 255, 255, 0.6) 0%, transparent 60%),
+    repeating-linear-gradient(
+      180deg,
+      transparent 0px, transparent 29px,
+      var(--paper-rule) 29px, var(--paper-rule) 30px
+    ),
+    linear-gradient(225deg, #fdf8ee 0%, var(--paper-cream) 60%, var(--paper-aged) 100%);
+  border-radius: 0 16px 16px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-right::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 42px;
+  background: linear-gradient(to left, transparent 0%, rgba(46, 24, 8, 0.16) 100%);
+  pointer-events: none;
+}
+
+/* Tree Heading */
+.tree-heading {
+  text-align: center;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 10;
+}
+
+.tree-eyebrow {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--gold-primary);
+  text-transform: uppercase;
+}
+
+.tree-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 3vw, 2.3rem);
+  font-weight: 700;
+  color: #3b200e;
+  line-height: 1.2;
+}
+
+body.night-mode .tree-title {
+  color: #e6f1ff;
+}
+
+.tree-sub {
+  font-family: 'Caveat', cursive;
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* Tree Interactive Stage */
+.tree-stage {
+  flex-grow: 1;
+  position: relative;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Unified Botanical Memory Tree SVG */
+.botanical-tree-svg {
+  width: 100%;
+  max-width: 520px;
+  height: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 2;
+  overflow: visible;
+  filter: drop-shadow(0 8px 18px rgba(35, 17, 5, 0.25));
+}
+
+/* Organic Foliage & Bough Sway Animations */
+.canopy-sway-1 {
+  animation: swayLeaves1 6.5s ease-in-out infinite alternate;
+  transform-origin: 250px 250px;
+}
+
+.canopy-sway-2 {
+  animation: swayLeaves2 5.5s ease-in-out infinite alternate;
+  transform-origin: 250px 250px;
+}
+
+.canopy-sway-3 {
+  animation: swayLeaves3 4.5s ease-in-out infinite alternate;
+  transform-origin: 250px 200px;
+}
+
+@keyframes swayLeaves1 {
+  0% { transform: rotate(0deg) scale(1); }
+  100% { transform: rotate(1.2deg) scale(1.012); }
+}
+
+@keyframes swayLeaves2 {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(-1.5deg); }
+}
+
+@keyframes swayLeaves3 {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(2deg); }
+}
+
+/* ============================================================
+   8. THE 12 ARTISAN BLOSSOM NODES
+   ============================================================ */
+.blossoms-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+}
+
+.blossom-node {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  transition: transform 0.35s var(--ease-spring);
+  outline: none;
+}
+
+.blossom-node:hover {
+  transform: translate(-50%, -50%) scale(1.28);
+  z-index: 50;
+}
+
+.blossom-bloom {
+  width: 38px;
+  height: 38px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.petal {
+  position: absolute;
+  width: 15px;
+  height: 22px;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  transform-origin: center bottom;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.p-1 { transform: rotate(0deg) translateY(-8px); }
+.p-2 { transform: rotate(72deg) translateY(-8px); }
+.p-3 { transform: rotate(144deg) translateY(-8px); }
+.p-4 { transform: rotate(216deg) translateY(-8px); }
+.p-5 { transform: rotate(288deg) translateY(-8px); }
+
+.blossom-core {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff9c4 0%, #fbc02d 100%);
+  box-shadow: 0 0 6px rgba(251, 192, 45, 0.8);
+  z-index: 5;
+}
+
+.blossom-halo {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 235, 59, 0.4) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.blossom-node:hover .blossom-halo {
+  opacity: 1;
+}
+
+/* Handwritten Student Name Tag */
+.blossom-tag {
+  margin-top: 4px;
+  padding: 2px 8px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(138, 93, 44, 0.3);
+  border-radius: 12px;
+  font-family: 'Caveat', cursive;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #3b200e;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+  white-space: nowrap;
+  pointer-events: none;
+  transition: all 0.25s ease;
+}
+
+.blossom-node:hover .blossom-tag {
+  background: #fff;
+  border-color: var(--gold-primary);
+  color: #a31422;
+  box-shadow: 0 4px 12px rgba(212, 163, 57, 0.5);
+  transform: scale(1.08);
+}
+
+/* Individual Flower Color Themes */
+/* 0: Sakura Pink */
+.b-pink .petal { background: linear-gradient(to top, #f8bbd0, #f06292); }
+/* 1: Golden Sunflower */
+.b-gold .petal { background: linear-gradient(to top, #ffe082, #ffa000); }
+/* 2: White Magnolia */
+.b-white .petal { background: linear-gradient(to top, #f5f5f5, #ffffff); }
+.b-white .blossom-core { background: radial-gradient(circle, #ffe082, #ffb300); }
+/* 3: Lavender Orchid */
+.b-lavender .petal { background: linear-gradient(to top, #e1bee7, #ab47bc); }
+/* 4: Peach Coral */
+.b-peach .petal { background: linear-gradient(to top, #ffccbc, #ff7043); }
+/* 5: Crimson Rose */
+.b-rose .petal { background: linear-gradient(to top, #ef9a9a, #e53935); }
+/* 6: Buttercup Cream */
+.b-cream .petal { background: linear-gradient(to top, #fff9c4, #fff176); }
+/* 7: Coral Lotus */
+.b-coral .petal { background: linear-gradient(to top, #ffab91, #f4511e); }
+/* 8: Sky Blue */
+.b-sky .petal { background: linear-gradient(to top, #b3e5fc, #29b6f6); }
+/* 9: Violet Royal */
+.b-violet .petal { background: linear-gradient(to top, #d1c4e9, #7e57c2); }
+/* 10: Radiant Marigold */
+.b-marigold .petal { background: linear-gradient(to top, #ffcc80, #fb8c00); }
+
+/* 11: Masterpiece Rose for 11A2 */
+.b-masterpiece .bloom-master {
+  width: 46px;
+  height: 46px;
+}
+
+.b-masterpiece .petal {
+  width: 18px;
+  height: 26px;
+  background: linear-gradient(to top, #ff5252, #b71c1c);
+}
+
+.b-masterpiece .p-1 { transform: rotate(0deg) translateY(-10px); }
+.b-masterpiece .p-2 { transform: rotate(60deg) translateY(-10px); }
+.b-masterpiece .p-3 { transform: rotate(120deg) translateY(-10px); }
+.b-masterpiece .p-4 { transform: rotate(180deg) translateY(-10px); }
+.b-masterpiece .p-5 { transform: rotate(240deg) translateY(-10px); }
+.b-masterpiece .p-6 { transform: rotate(300deg) translateY(-10px); }
+
+.master-core {
+  width: 18px;
+  height: 18px;
+  background: #ffffff;
+  color: #d32f2f;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px rgba(255, 82, 82, 0.8);
+}
+
+.tag-master {
+  background: linear-gradient(135deg, #44240d, #251204);
+  color: var(--gold-bright);
+  border-color: var(--gold-primary);
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+/* Staggered sway for flower nodes */
+#flower-0, #flower-3, #flower-6, #flower-9 {
+  animation: swayNode1 4.8s ease-in-out infinite alternate;
+}
+#flower-1, #flower-4, #flower-7, #flower-10 {
+  animation: swayNode2 5.4s ease-in-out infinite alternate;
+}
+#flower-2, #flower-5, #flower-8, #flower-11 {
+  animation: swayNode3 4.2s ease-in-out infinite alternate;
+}
+
+@keyframes swayNode1 {
+  0% { transform: translate(-50%, -50%) rotate(-2deg); }
+  100% { transform: translate(-50%, -50%) rotate(2.5deg); }
+}
+
+@keyframes swayNode2 {
+  0% { transform: translate(-50%, -50%) rotate(2.5deg); }
+  100% { transform: translate(-50%, -50%) rotate(-2deg); }
+}
+
+@keyframes swayNode3 {
+  0% { transform: translate(-50%, -50%) scale(1); }
+  100% { transform: translate(-50%, -50%) scale(1.05); }
+}
+
+/* ============================================================
+   9. GROUND SANCTUARY: MEADOW, MUSHROOMS & BUTTERFLY
+   ============================================================ */
+.ground-sanctuary {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 75px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.grass-meadow-svg {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 55px;
+}
+
+.grass-sway-back {
+  animation: grassWind1 3.2s ease-in-out infinite alternate;
+  transform-origin: bottom center;
+}
+
+.grass-sway-front {
+  animation: grassWind2 2.6s ease-in-out infinite alternate;
+  transform-origin: bottom center;
+}
+
+@keyframes grassWind1 {
+  0% { transform: skewX(-2deg); }
+  100% { transform: skewX(3deg); }
+}
+
+@keyframes grassWind2 {
+  0% { transform: skewX(3deg); }
+  100% { transform: skewX(-2deg); }
+}
+
+.mushrooms-row {
+  position: absolute;
+  inset: 0;
+  pointer-events: auto;
+}
+
+.mushroom-node {
+  position: absolute;
+  cursor: pointer;
+  transition: transform 0.25s var(--ease-spring);
+  outline: none;
+}
+
+.mushroom-node:hover {
+  transform: translateY(-5px) scale(1.2);
+}
+
+.easter-mushroom {
+  position: relative;
+}
+
+.mushroom-secret-sparkle {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.75rem;
+  animation: pulseSparkle 1.8s ease-in-out infinite;
+}
+
+@keyframes pulseSparkle {
+  0%, 100% { transform: translateX(-50%) scale(0.8); opacity: 0.5; }
+  50% { transform: translateX(-50%) scale(1.25); opacity: 1; }
+}
+
+/* Flying Butterfly */
+.flying-butterfly {
+  position: absolute;
+  bottom: 45px;
+  right: 40px;
+  animation: flutterFlight 8s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+.wing-left {
+  animation: wingFlap 0.22s ease-in-out infinite alternate;
+  transform-origin: 12px 9px;
+}
+
+.wing-right {
+  animation: wingFlap 0.22s ease-in-out infinite alternate 0.11s;
+  transform-origin: 12px 9px;
+}
+
+@keyframes wingFlap {
+  0% { transform: scaleX(1); }
+  100% { transform: scaleX(0.25); }
+}
+
+@keyframes flutterFlight {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(-30px, -25px) rotate(-10deg); }
+  66% { transform: translate(-15px, -45px) rotate(8deg); }
+  100% { transform: translate(-45px, -65px) rotate(-5deg); }
+}
+
+/* Page Corner Curl */
+.page-corner-curl {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 0 44px 44px;
+  border-color: transparent transparent rgba(78, 46, 19, 0.25) transparent;
+  z-index: 25;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.page-corner-curl::before {
+  content: '';
+  position: absolute;
+  bottom: -42px;
+  right: -42px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 0 40px 40px;
+  border-color: transparent transparent var(--paper-cream) transparent;
+}
+
+.page-corner-curl:hover {
+  border-width: 0 0 56px 56px;
+}
+
+.page-corner-curl:hover::before {
+  bottom: -54px;
+  right: -54px;
+  border-width: 0 0 52px 52px;
+}
+
+/* ============================================================
+   10. VINTAGE WISH POSTCARD MODAL
+   ============================================================ */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(14, 7, 2, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.modal-backdrop.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.wish-postcard-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(var(--rot, -1deg)) scale(0.9);
+  width: min(520px, 92vw);
+  background: #fffdf8;
+  border-radius: 8px;
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.65),
+    0 5px 15px rgba(0, 0, 0, 0.25);
+  z-index: 1001;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.4s var(--ease-spring);
+  border: 1px solid rgba(138, 93, 44, 0.25);
+}
+
+.wish-postcard-modal.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) rotate(var(--rot, -1deg)) scale(1);
+}
+
+.postcard-wax-seal {
+  position: absolute;
+  top: -18px;
+  left: 30px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #b71c1c 0%, #7f0000 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  z-index: 10;
+}
+
+.postcard-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.05);
+  border: none;
+  font-size: 1rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.postcard-close-btn:hover {
+  background: rgba(0, 0, 0, 0.12);
+  color: #a31422;
+  transform: rotate(90deg);
+}
+
+.postcard-inner {
+  padding: 38px 32px 28px;
+  position: relative;
+}
+
+.postcard-stamp {
+  position: absolute;
+  top: 20px;
+  right: 58px;
+  width: 44px;
+  height: 52px;
+  border: 1.5px dashed var(--gold-primary);
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(212, 163, 57, 0.08);
+}
+
+.stamp-text {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: var(--gold-dark);
+}
+
+.postcard-to {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.25rem;
+  color: var(--text-muted);
+}
+
+.postcard-sender {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #3b200e;
+  margin: 4px 0 2px;
+}
+
+.postcard-flourish {
+  font-size: 0.9rem;
+  color: var(--gold-primary);
+  margin-bottom: 16px;
+}
+
+.postcard-content {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #2e1a0d;
+  font-style: italic;
+  min-height: 90px;
+  margin-bottom: 24px;
+  padding: 0 4px;
+}
+
+.postcard-nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px dashed rgba(138, 93, 44, 0.25);
+  padding-top: 14px;
+}
+
+.btn-post-nav {
+  padding: 6px 16px;
+  background: rgba(212, 163, 57, 0.15);
+  border: 1px solid var(--gold-primary);
+  border-radius: 20px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #3b200e;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn-post-nav:hover {
+  background: var(--gold-primary);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.post-counter {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-light);
+}
+
+/* ============================================================
+   11. PHOTO LIGHTBOX & VIDEO CINEMA MODALS
+   ============================================================ */
+.photo-lightbox {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  max-width: min(720px, 92vw);
+  max-height: 90vh;
+  z-index: 1001;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.4s var(--ease-spring);
+}
+
+.photo-lightbox.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.lightbox-stage {
+  background: #fff;
+  padding: 12px 12px 18px;
+  border-radius: 6px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#lightbox-img {
+  max-width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.lightbox-caption-text {
+  font-family: 'Caveat', cursive;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #3b200e;
+  margin-top: 12px;
+}
+
+.lightbox-close-btn {
+  position: absolute;
+  top: -16px;
+  right: -16px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #b71c1c;
+  color: #fff;
+  border: 2px solid #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transition: transform 0.25s ease;
+  z-index: 10;
+}
+
+.lightbox-close-btn:hover {
+  transform: scale(1.15) rotate(90deg);
+}
+
+/* Video Cinema Modal */
+.video-cinema-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  width: min(760px, 94vw);
+  z-index: 1001;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.4s var(--ease-spring);
+}
+
+.video-cinema-modal.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.cinema-bezel {
+  background: linear-gradient(135deg, #371b07, #1c0c03);
+  padding: 16px 16px 14px;
+  border-radius: 12px;
+  border: 2px solid var(--gold-primary);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.85);
+  position: relative;
+}
+
+.cinema-screen {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.cinema-screen video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.cinema-caption {
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--gold-bright);
+  letter-spacing: 1px;
+  margin-top: 10px;
+}
+
+.cinema-close-btn {
+  position: absolute;
+  top: -16px;
+  right: -16px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #b71c1c;
+  color: #fff;
+  border: 2px solid #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transition: transform 0.25s ease;
+  z-index: 10;
+}
+
+.cinema-close-btn:hover {
+  transform: scale(1.15) rotate(90deg);
+}
+
+/* ============================================================
+   12. PETALS CANVAS & MUSHROOM TOAST
+   ============================================================ */
+#petals-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 500;
+}
+
+.mushroom-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(40px);
+  background: rgba(35, 17, 7, 0.92);
+  color: var(--gold-bright);
+  border: 1.5px solid var(--gold-primary);
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(12px);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.4s var(--ease-spring);
+  z-index: 2000;
+  text-align: center;
+  max-width: 90vw;
+}
+
+.mushroom-toast.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ============================================================
+   13. RESPONSIVE DESIGN (TABLETS & MOBILE)
+   ============================================================ */
+@media (max-width: 920px) {
+  .stage-container {
+    padding: 75px 12px 30px;
+  }
+
+  .album-case {
+    flex-direction: column;
+    min-height: auto;
+    border-radius: 12px;
+  }
+
+  .silk-ribbon {
+    display: none;
+  }
+
+  .album-spine {
+    width: 100%;
+    height: 18px;
+  }
+
+  .album-page {
+    min-height: auto;
+    padding: 28px 20px;
+  }
+
+  .page-left {
+    border-radius: 12px 12px 0 0;
+  }
+
+  .page-right {
+    border-radius: 0 0 12px 12px;
+  }
+
+  .page-left::after,
+  .page-right::before {
+    display: none;
+  }
+
+  .tree-stage {
+    min-height: 440px;
+  }
+
+  .botanical-tree-svg {
+    max-width: 100%;
+  }
+
+  .book-3d {
+    width: 320px;
+    height: 220px;
+  }
+
+  .cover-title {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .top-nav {
+    padding: 6px 12px;
+  }
+
+  .brand-title {
+    font-size: 1.05rem;
+  }
+
+  .nav-pill {
+    padding: 5px 10px;
+    font-size: 0.75rem;
+  }
+
+  .script-title {
+    font-size: 1.8rem;
+  }
+
+  .callout-poem {
+    font-size: 1.05rem;
+  }
+
+  .scrapbook-keepsakes {
+    grid-template-columns: 1fr;
+  }
+
+  .cinema-ticket {
+    grid-column: span 1;
+  }
+
+  .tree-title {
+    font-size: 1.6rem;
+  }
+
+  .blossom-bloom {
+    width: 32px;
+    height: 32px;
+  }
+
+  .petal {
+    width: 12px;
+    height: 18px;
+  }
+
+  .blossom-tag {
+    font-size: 0.82rem;
+    padding: 1px 6px;
+  }
+}
+
+
+/* ============================================================
+   14. BURST PARTICLES & MUSHROOM WIGGLE
+   ============================================================ */
+.petal-burst-particle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 10000;
+  animation: burstFly 0.9s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes burstFly {
+  0% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--tx), var(--ty)) rotate(var(--tr)) scale(0.2);
+    opacity: 0;
+  }
+}
+
+@keyframes mushroomWiggle {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-8px) rotate(-10deg) scale(1.2); }
+  75% { transform: translateY(-8px) rotate(10deg) scale(1.2); }
+}

@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tri Ân Thầy Long – Cây Kỷ Niệm Lớp 11A2 ❤️</title>
+  
+  <!-- Premium Typography: Playfair Display + Dancing Script + Caveat + Quicksand -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Quicksand:wght@400;500;600;700&display=swap&subset=vietnamese" rel="stylesheet">
+  
+  <!-- Modular Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Background Ambient Glow & Dust Motes -->
+  <div class="ambient-dust" id="ambient-dust" aria-hidden="true"></div>
+
+  <!-- Top Navigation Controls -->
+  <header class="top-nav">
+    <div class="nav-brand">
+      <span class="badge-dot"></span>
+      <span class="brand-title">Sổ Kỷ Niệm 11A2</span>
+    </div>
+    <div class="nav-actions">
+      <button id="theme-btn" class="nav-pill" aria-label="Đổi giao diện ngày/đêm đom đóm">
+        <span class="pill-icon">🌙</span>
+        <span class="pill-text">Đêm Đom Đóm</span>
+      </button>
+      <button id="music-btn" class="nav-pill" aria-label="Bật tắt nhạc nền">
+        <span class="pill-icon">🎵</span>
+        <span class="pill-text">Bật Nhạc</span>
+      </button>
+    </div>
+  </header>
+  <audio id="bg-music" loop preload="none"></audio>
+
+  <!-- 3D Leather Memorial Book Intro Overlay -->
+  <div id="intro-overlay" role="dialog" aria-modal="true" aria-label="Bìa sách kỷ niệm 11A2">
+    <div class="intro-ambient-light"></div>
+    
+    <div class="intro-book-wrapper">
+      <div id="intro-book" class="book-3d">
+        <div id="book-cover-front" class="book-cover" onclick="openBook()" role="button" tabindex="0" aria-label="Nhấn để mở cuốn sách kỷ niệm">
+          <div class="cover-border-outer"></div>
+          <div class="cover-border-inner"></div>
+          
+          <div class="cover-content">
+            <div class="cover-crest">
+              <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+                <circle cx="22" cy="22" r="20" stroke="#d4a339" stroke-width="1.5" stroke-dasharray="3 2"/>
+                <circle cx="22" cy="22" r="16" fill="rgba(212, 163, 57, 0.15)"/>
+                <path d="M22 10 L25 18 L34 18 L27 23 L30 32 L22 27 L14 32 L17 23 L10 18 L19 18 Z" fill="#d4a339"/>
+              </svg>
+            </div>
+            
+            <span class="cover-subtitle school-year">11A2 · NIÊN KHÓA 2026–2027</span>
+            <h1 class="cover-title dedication-title">Gửi Thầy Long</h1>
+            <div class="cover-divider">✦ ─── ✿ ─── ✦</div>
+            <p class="cover-tagline">MỘT QUYỂN SÁCH MỞ RA · MỘT CÂY XANH KỶ NIỆM</p>
+            
+            <div class="cover-cta">
+              <span class="cta-hand">👉</span> Chạm vào bìa sách để lật mở trang...
+            </div>
+          </div>
+        </div>
+        <div id="book-cover-back" class="book-back"></div>
+      </div>
+    </div>
+    
+    <button id="skip-btn" onclick="skipIntro()" aria-label="Bỏ qua mở đầu">Bỏ qua mở đầu ▶</button>
+  </div>
+
+  <!-- Main Open Book Stage -->
+  <main class="stage-container">
+    <div class="album-viewport">
+      
+      <!-- Hardcover Album Outer Case -->
+      <div class="album-case" id="main-book">
+        
+        <!-- Silk Red Bookmark Ribbon -->
+        <div class="silk-ribbon" aria-hidden="true"></div>
+
+        <!-- ================= LEFT PAGE: THE SCRAPBOOK & LETTER ================= -->
+        <section class="album-page page-left" aria-label="Trang thư tri ân và kỷ vật lớp 11A2">
+          <div class="page-texture-overlay"></div>
+          
+          <!-- School Crest Header -->
+          <div class="page-header-row">
+            <div class="school-badge-wrap">
+              <img id="school-logo" src="thptkd.png" alt="Logo trường" onerror="this.style.display='none'; document.getElementById('logo-placeholder').style.display='block'">
+              <div id="logo-placeholder" class="crest-placeholder" style="display:none;">
+                <span>11A2</span>
+              </div>
+            </div>
+            <div class="school-meta">
+              <span class="meta-school" id="school-name-label">Trường THPT Khương Đình</span>
+              <span class="meta-class school-year">11A2 · Niên khóa 2026–2027</span>
+            </div>
+          </div>
+
+          <!-- Letter Title -->
+          <div class="letter-heading">
+            <h2 class="script-title dedication-title">Gửi Thầy Long</h2>
+            <div class="letter-ornament">❧ ─── ✿ ─── ☙</div>
+            <p class="letter-quote">“Người thầy đã gieo mầm, để lớp 11A2 mãi xanh tươi...”</p>
+          </div>
+
+          <!-- Letter Prose -->
+          <article class="letter-body">
+            <p>
+              Có những điều không cần nói thành lời, vì trái tim đã lặng thầm khắc ghi. Thầy – người gieo những hạt giống tri thức, nâng đỡ từng tâm hồn còn non dại của tụi em suốt năm tháng dưới mái trường.
+            </p>
+
+            <blockquote class="callout-poem">
+              <p>“Nghề giáo là nghề trồng người.<br>Thầy nâng niu từng chồi biếc, để hôm nay hoa nở rộ giữa trang đời...”</p>
+            </blockquote>
+
+            <p class="letter-note">
+              Một năm học trôi qua như cuốn lưu bút ấm áp. Dưới đây là những kỷ vật thân thương nhất của tập thể 11A2 gửi tặng thầy:
+            </p>
+          </article>
+
+          <!-- Keepsakes Scrapbook Gallery (Polaroid, Teacher Frame, Cinema Ticket) -->
+          <div class="scrapbook-keepsakes">
+            
+            <!-- 1. Class Photo Polaroid -->
+            <div class="keepsake-item polaroid-card" id="frame-class" onclick="openLightbox('class')" tabindex="0" role="button" aria-label="Xem ảnh tập thể lớp 11A2">
+              <div class="washi-tape washi-left"></div>
+              <div class="polaroid-inner">
+                <div class="photo-box">
+                  <img id="class-photo" src="class.jpg" alt="Ảnh tập thể 11A2" onerror="this.style.display='none'; document.getElementById('class-photo-ph').style.display='flex'">
+                  <div id="class-photo-ph" class="photo-fallback">
+                    <span class="fallback-icon">📷</span>
+                    <span class="fallback-text">Ảnh tập thể 11A2</span>
+                  </div>
+                </div>
+                <div class="polaroid-caption">Tập thể 11A2 ❤️</div>
+              </div>
+            </div>
+
+            <!-- 2. Teacher Portrait Keepsake -->
+            <div class="keepsake-item teacher-card" id="frame-teacher" onclick="openLightbox('teacher')" tabindex="0" role="button" aria-label="Xem ảnh Thầy Long">
+              <div class="washi-tape washi-right"></div>
+              <div class="portrait-inner">
+                <div class="portrait-box">
+                  <img id="teacher-photo" src="teacher.jpg" alt="Thầy Long" onerror="this.style.display='none'; document.getElementById('teacher-photo-ph').style.display='flex'">
+                  <div id="teacher-photo-ph" class="photo-fallback">
+                    <span class="fallback-icon">👨‍🏫</span>
+                    <span class="fallback-text">Thầy Long</span>
+                  </div>
+                </div>
+                <div class="portrait-caption">Thầy Long – GVCN</div>
+              </div>
+            </div>
+
+            <!-- 3. Cinema Memory Ticket -->
+            <div class="keepsake-item cinema-ticket" id="frame-video" onclick="openVideoModal()" tabindex="0" role="button" aria-label="Mở video kỷ niệm lớp 11A2">
+              <div class="ticket-inner">
+                <div class="ticket-stub">
+                  <span class="stub-icon">🎬</span>
+                </div>
+                <div class="ticket-info">
+                  <span class="ticket-label">THƯỚC PHIM KỶ NIỆM</span>
+                  <span class="ticket-sub">Chạm để xem video 11A2 ▶</span>
+                </div>
+                <div class="ticket-play-badge">▶</div>
+              </div>
+            </div>
+
+          </div><!-- end scrapbook-keepsakes -->
+
+          <!-- Left Page Footer -->
+          <footer class="page-bottom-note">
+            <span>✦ Kỷ niệm sẽ theo tụi em suốt cuộc đời ✦</span>
+          </footer>
+        </section>
+
+        <!-- Book Central Crease Spine -->
+        <div class="album-spine" aria-hidden="true">
+          <div class="spine-stitching"></div>
+        </div>
+
+        <!-- ================= RIGHT PAGE: BOTANICAL MEMORY TREE ================= -->
+        <section class="album-page page-right" aria-label="Trang Cây kỷ niệm và 12 bông hoa lời chúc">
+          <div class="page-texture-overlay"></div>
+          
+          <!-- Right Page Header -->
+          <div class="tree-heading">
+            <span class="tree-eyebrow">VƯỜN KỶ NIỆM</span>
+            <h2 class="tree-title">Cây Kỷ Niệm 11A2</h2>
+            <p class="tree-sub">Chạm vào từng đóa hoa để đọc lời chúc từ học trò 🌸</p>
+          </div>
+
+          <!-- Interactive Botanical Tree Stage -->
+          <div class="tree-stage" id="tree">
+            
+            <!-- Unified Botanical Memory Tree SVG (Trunk, Organic Branches, and Attached Canopy) -->
+            <svg class="botanical-tree-svg" id="botanical-tree" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="cg-deep" cx="50%" cy="45%" r="55%">
+                  <stop offset="0%" stop-color="#2e6423"/>
+                  <stop offset="100%" stop-color="#183d10"/>
+                </radialGradient>
+                <radialGradient id="cg-mid" cx="50%" cy="40%" r="50%">
+                  <stop offset="0%" stop-color="#4f8c36"/>
+                  <stop offset="100%" stop-color="#295a1a"/>
+                </radialGradient>
+                <radialGradient id="cg-light" cx="48%" cy="35%" r="50%">
+                  <stop offset="0%" stop-color="#7cb553"/>
+                  <stop offset="100%" stop-color="#3e7525"/>
+                </radialGradient>
+                <radialGradient id="cg-sun" cx="50%" cy="35%" r="45%">
+                  <stop offset="0%" stop-color="#a2dc68"/>
+                  <stop offset="100%" stop-color="#5e9e38"/>
+                </radialGradient>
+                <linearGradient id="bark-gradient" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#371b07"/>
+                  <stop offset="25%" stop-color="#5f3414"/>
+                  <stop offset="50%" stop-color="#854b20"/>
+                  <stop offset="75%" stop-color="#5f3414"/>
+                  <stop offset="100%" stop-color="#371b07"/>
+                </linearGradient>
+                <linearGradient id="plaque-grad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#5f3414"/>
+                  <stop offset="100%" stop-color="#2b1304"/>
+                </linearGradient>
+              </defs>
+
+              <!-- Layer 1: Deep Background Canopy Foliage -->
+              <g class="canopy-group canopy-sway-1">
+                <ellipse cx="110" cy="200" rx="95" ry="75" fill="url(#cg-deep)"/>
+                <ellipse cx="390" cy="195" rx="95" ry="75" fill="url(#cg-deep)"/>
+                <ellipse cx="250" cy="140" rx="135" ry="95" fill="url(#cg-deep)"/>
+                <ellipse cx="70" cy="230" rx="60" ry="50" fill="url(#cg-deep)"/>
+                <ellipse cx="425" cy="230" rx="65" ry="55" fill="url(#cg-deep)"/>
+                <ellipse cx="250" cy="225" rx="80" ry="55" fill="url(#cg-deep)"/>
+              </g>
+
+              <!-- Layer 2: Main Tree Trunk and Organic Branches -->
+              <g class="tree-woodwork">
+                <!-- Roots flaring into soil -->
+                <path d="M205 485 C175 488 150 492 135 500" stroke="#371b07" stroke-width="12" stroke-linecap="round" fill="none"/>
+                <path d="M295 485 C325 488 350 492 365 500" stroke="#371b07" stroke-width="12" stroke-linecap="round" fill="none"/>
+                <!-- Trunk Body -->
+                <path d="M198 490 C188 410 205 320 218 250 L282 250 C295 320 312 410 302 490 Z" fill="url(#bark-gradient)"/>
+                <!-- Bark Texture Lines -->
+                <path d="M225 480 C220 400 225 330 235 255" stroke="rgba(0,0,0,0.25)" stroke-width="1.8" fill="none"/>
+                <path d="M250 485 C248 405 250 330 250 255" stroke="rgba(255,255,255,0.08)" stroke-width="1.2" fill="none"/>
+                <path d="M275 480 C280 400 275 330 265 255" stroke="rgba(0,0,0,0.25)" stroke-width="1.8" fill="none"/>
+
+                <!-- Left Major Branch and Sub-branches -->
+                <path d="M222 255 C180 240 130 225 75 220" stroke="#4e280c" stroke-width="18" stroke-linecap="round" fill="none"/>
+                <path d="M145 230 C120 195 95 140 50 135" stroke="#4e280c" stroke-width="12" stroke-linecap="round" fill="none"/>
+                <path d="M165 210 C155 160 135 110 100 75" stroke="#4e280c" stroke-width="9" stroke-linecap="round" fill="none"/>
+                <path d="M95 225 C75 235 60 245 40 255" stroke="#4e280c" stroke-width="8" stroke-linecap="round" fill="none"/>
+
+                <!-- Right Major Branch and Sub-branches -->
+                <path d="M278 255 C320 240 370 225 425 220" stroke="#4e280c" stroke-width="18" stroke-linecap="round" fill="none"/>
+                <path d="M355 230 C380 195 405 140 450 135" stroke="#4e280c" stroke-width="12" stroke-linecap="round" fill="none"/>
+                <path d="M335 210 C345 160 365 110 400 75" stroke="#4e280c" stroke-width="9" stroke-linecap="round" fill="none"/>
+                <path d="M385 225 C405 245 420 265 435 285" stroke="#4e280c" stroke-width="9" stroke-linecap="round" fill="none"/>
+
+                <!-- Center Crown Boughs -->
+                <path d="M250 250 C248 200 245 160 225 90" stroke="#4e280c" stroke-width="15" stroke-linecap="round" fill="none"/>
+                <path d="M248 190 C265 155 285 125 305 105" stroke="#4e280c" stroke-width="11" stroke-linecap="round" fill="none"/>
+                <path d="M245 140 C250 100 255 70 260 50" stroke="#4e280c" stroke-width="8" stroke-linecap="round" fill="none"/>
+
+                <!-- Carved Wooden Plaque on Trunk -->
+                <g transform="translate(202, 335)">
+                  <rect x="0" y="0" width="96" height="44" rx="6" fill="url(#plaque-grad)" stroke="#1c0c03" stroke-width="2"/>
+                  <rect x="3" y="3" width="90" height="38" rx="4" fill="none" stroke="#d4a339" stroke-width="1" opacity="0.7"/>
+                  <circle cx="8" cy="8" r="1.8" fill="#d4a339"/>
+                  <circle cx="88" cy="8" r="1.8" fill="#d4a339"/>
+                  <circle cx="8" cy="36" r="1.8" fill="#d4a339"/>
+                  <circle cx="88" cy="36" r="1.8" fill="#d4a339"/>
+                  <text x="48" y="21" text-anchor="middle" font-family="'Quicksand', sans-serif" font-weight="700" font-size="11" fill="#fbe08e" letter-spacing="1">LỚP 11A2</text>
+                  <text x="48" y="34" text-anchor="middle" font-family="'Quicksand', sans-serif" font-weight="600" font-size="8" fill="#d4a339">2026 – 2027</text>
+                </g>
+              </g>
+
+              <!-- Layer 3: Middle Foliage Wrapping Branches -->
+              <g class="canopy-group canopy-sway-2">
+                <ellipse cx="150" cy="170" rx="80" ry="60" fill="url(#cg-mid)"/>
+                <ellipse cx="350" cy="165" rx="80" ry="60" fill="url(#cg-mid)"/>
+                <ellipse cx="250" cy="120" rx="115" ry="80" fill="url(#cg-mid)"/>
+                <ellipse cx="85" cy="180" rx="65" ry="50" fill="url(#cg-mid)"/>
+                <ellipse cx="415" cy="175" rx="65" ry="50" fill="url(#cg-mid)"/>
+                <ellipse cx="250" cy="205" rx="70" ry="45" fill="url(#cg-mid)"/>
+              </g>
+
+              <!-- Layer 4: Sunlit Front Foliage and Sparkles -->
+              <g class="canopy-group canopy-sway-3">
+                <ellipse cx="220" cy="80" rx="75" ry="52" fill="url(#cg-light)"/>
+                <ellipse cx="280" cy="75" rx="72" ry="50" fill="url(#cg-light)"/>
+                <ellipse cx="250" cy="55" rx="62" ry="42" fill="url(#cg-sun)"/>
+                <ellipse cx="110" cy="85" rx="50" ry="36" fill="url(#cg-light)"/>
+                <ellipse cx="390" cy="80" rx="52" ry="38" fill="url(#cg-light)"/>
+                <circle cx="250" cy="48" r="8" fill="#d2fba4" opacity="0.8"/>
+                <circle cx="210" cy="65" r="6" fill="#d2fba4" opacity="0.7"/>
+                <circle cx="290" cy="62" r="6.5" fill="#d2fba4" opacity="0.7"/>
+              </g>
+            </svg>
+
+            <!-- ================= 12 ARTISAN BLOSSOM NODES ================= -->
+            <div class="blossoms-layer" id="blossoms-layer">
+              
+              <!-- Flower 0: Sakura Pink (Minh Anh) -->
+              <div class="blossom-node b-pink" id="flower-0" style="top: 48%; left: 14%;" onclick="openWish(0)" tabindex="0" role="button" aria-label="Lời chúc của Nguyễn Minh Anh">
+                <div class="blossom-bloom">
+                  <div class="petal p-1"></div><div class="petal p-2"></div><div class="petal p-3"></div><div class="petal p-4"></div><div class="petal p-5"></div>
+                  <div class="blossom-core"></div>
+                  <div class="blossom-halo"></div>
+                </div>
+                <div class="blossom-tag">Minh Anh</div>
+              </div>
+
+              <!-- Flower 1: Golden Sunflower (Bảo Châu) -->
+              <div class="blossom-node b-gold" id="flower-1" style="top: 32%; left: 24%;" onclick="openWish(1)" tabindex="0" role="button" aria-label="Lời chúc của Trần Bảo Châu">
+                <div class="blossom-bloom">
+                  <div class="petal p-1"></div><div class="petal p-2"></div><div class="petal p-3"></div><div class="petal p-4"></div><div class="petal p-5"></div>
+                  <div class="blossom-core"></div>
+                  <div class="blossom-halo"></div>
+                </div>
+                <div class="blossom-tag">Bảo Châu</div>
+              </div>
+
+              <!-- Flower 2: White Magnolia (Hoàng Nam) -->
+              <div class="blossom-node b-white" id="flower-2" style="top: 18%; left: 36%;" onclick="openWish(2)" tabindex="0" role="button" aria-label="Lời chúc của Lê Hoàng Nam">
+                <div class="blossom-bloom">
+                  <div class="petal p-1"></div><div class="petal p-2"></div><div class="petal p-3"></div><div class="petal p-4"></div><div class="petal p-5"></div>
+                  <div class="blossom-core"></div>
+                  <div class="blossom-halo"></div>
+                </div>
+                <div class="blossom-tag">Hoàng Nam</div>
+              </div>
+
+              <!-- Flower 3: Lavender Orchid (Thị Lan) -->
+              <div class="blossom-node b-lavender" id="flower-3" style="top: 26%; left: 56%;" onclick="openWish(3)" tabindex="0" role="button" aria-label="Lời chúc của Phạm Thị Lan">
+                <div class="blossom-bloom">
+                  <div class="petal p-1"></div><div class="petal p-2"></div><div class="petal p-3"></div><div class="petal p-4"></div><div class="petal p-5"></div>
+                  <div class="blossom-core"></div>
+                  <div class="blossom-halo"></div>
+                </div>
+                <div class="blossom-tag">Thị Lan</div>
+              </div>
+
+              <!-- Flower 4: Peach Coral (Đức Huy) -->
+              <div class="blossom-node b-peach" id="flower-4" style="top: 42%; left: 74%;" onclick="openWish(4)" tabindex="0" role="button" aria-label="Lời chúc của Vũ Đức Huy">
+                <div class="blossom-bloom">
+                  <div class="petal p-1"></div><div class="petal p-2"></div><div class="petal p-3"></div><div class="petal p-4"></div><div class="petal p-5"></div>
+                  <div class="blossom-core"></div>
+                  <div class="blossom-halo"></div>
+                </div>
+                <div class="blossom-tag">Đức Huy</div>
+              </div>
+
+              <!-- Flower 5: Crimson Rose (Thị Hương) -->
+              <div class="blossom-node b-rose" id="flower-5" style="top: 24%; left: 82%;" onclick="openWish(5)" tabindex="0" role="button" aria-label="Lời chúc của Ngô Thị Hương">
+                <div class="blossom-bloom">
+                  <div class="petal p-1"></div><div class="petal p-2"></div><div class="petal p-3"></div><div class="petal p-4"></div><div class="petal p-5"></div>
+                  <div class="blossom-core"></div>
+                  <div class="blossom-halo"></div>
+                </div>
+                <div class="blossom-tag">Thị Hương</div>
+              </div>
+
+              <!-- Flower 6: Buttercup Cream (Quang Minh) -->
+              <div class="blossom-node b-cream" id="flower-6" style="top: 14%; left: 20%;" onclick="openWish(6)" tabindex="0" role="button" aria-label="Lời chúc của Đinh Quang Minh">
+                <div class="blossom-bloom">
+                  <div class="petal p-1"></div><div class="petal p-2"></div><div class="petal p-3"></div><div class="petal p-4"></div><div class="petal p-5"></div>
+                  <div class="blossom-core"></div>
+                  <div class="blossom-halo"></div>
+                </div>
+                <div class="blossom-tag">Quang Minh</div>
+              </div>
+
+              <!-- Flower 7: Coral Lotus (Ngọc Linh) -->
+              <div class="blossom-node b-coral" id="flower-7" style="top: 10%; left: 52%;" onclick="openWish(7)" tabindex="0" role="button" aria-label="Lời chúc của Phan Ngọc Linh">
+                <div class="blossom-bloom">
+                  <div class="petal p-1"></div><div class="petal p-2"></div><div class="petal p-3"></div><div class="petal p-4"></div><div class="petal p-5"></div>
+                  <div class="blossom-core"></div>
+                  <div class="blossom-halo"></div>
+                </div>
+                <div class="blossom-tag">Ngọc Linh</div>
+              </div>
+
+              <!-- Flower 8: Sky Blue Hydrangea (Thị Mai) -->
+              <div class="blossom-node b-sky" id="flower-8" style="top: 56%; left: 84%;" onclick="openWish(8)" tabindex="0" role="button" aria-label="Lời chúc của Hoàng Thị Mai">
+                <div class="blossom-bloom">
+                  <div class="petal p-1"></div><div class="petal p-2"></div><div class="petal p-3"></div><div class="petal p-4"></div><div class="petal p-5"></div>
+                  <div class="blossom-core"></div>
+                  <div class="blossom-halo"></div>
+                </div>
+                <div class="blossom-tag">Thị Mai</div>
+              </div>
+
+              <!-- Flower 9: Royal Violet (Thanh Tùng) -->
+              <div class="blossom-node b-violet" id="flower-9" style="top: 28%; left: 8%;" onclick="openWish(9)" tabindex="0" role="button" aria-label="Lời chúc của Lý Thanh Tùng">
+                <div class="blossom-bloom">
+                  <div class="petal p-1"></div><div class="petal p-2"></div><div class="petal p-3"></div><div class="petal p-4"></div><div class="petal p-5"></div>
+                  <div class="blossom-core"></div>
+                  <div class="blossom-halo"></div>
+                </div>
+                <div class="blossom-tag">Thanh Tùng</div>
+              </div>
+
+              <!-- Flower 10: Radiant Marigold (Thị Thu) -->
+              <div class="blossom-node b-marigold" id="flower-10" style="top: 8%; left: 70%;" onclick="openWish(10)" tabindex="0" role="button" aria-label="Lời chúc của Đặng Thị Thu">
+                <div class="blossom-bloom">
+                  <div class="petal p-1"></div><div class="petal p-2"></div><div class="petal p-3"></div><div class="petal p-4"></div><div class="petal p-5"></div>
+                  <div class="blossom-core"></div>
+                  <div class="blossom-halo"></div>
+                </div>
+                <div class="blossom-tag">Thị Thu</div>
+              </div>
+
+              <!-- Flower 11: Imperial Heart Rose - Masterpiece (Tập thể 11A2) -->
+              <div class="blossom-node b-masterpiece" id="flower-11" style="top: 36%; left: 45%;" onclick="openWish(11)" tabindex="0" role="button" aria-label="Lời chúc của Tập thể 11A2">
+                <div class="blossom-bloom bloom-master">
+                  <div class="petal p-1"></div><div class="petal p-2"></div><div class="petal p-3"></div><div class="petal p-4"></div><div class="petal p-5"></div><div class="petal p-6"></div>
+                  <div class="blossom-core master-core">❤</div>
+                  <div class="blossom-halo master-halo"></div>
+                </div>
+                <div class="blossom-tag tag-master">✦ Tập thể 11A2 ✦</div>
+              </div>
+
+            </div><!-- end blossoms-layer -->
+
+            <!-- Ground Layer with Grass, Fairy Mushrooms & Butterfly -->
+            <div class="ground-sanctuary" aria-hidden="true">
+              
+              <!-- Watercolor Grass SVG -->
+              <svg class="grass-meadow-svg" viewBox="0 0 500 60" fill="none">
+                <g class="grass-sway-back">
+                  <path d="M15 55 C12 35 8 18 14 6 C17 18 20 35 19 55" fill="#689f38"/>
+                  <path d="M55 55 C52 35 48 18 54 6 C57 18 60 35 59 55" fill="#689f38"/>
+                  <path d="M110 55 C107 35 103 18 109 6 C112 18 115 35 114 55" fill="#689f38"/>
+                  <path d="M380 55 C377 35 373 18 379 6 C382 18 385 35 384 55" fill="#689f38"/>
+                  <path d="M440 55 C437 35 433 18 439 6 C442 18 445 35 444 55" fill="#689f38"/>
+                </g>
+                <g class="grass-sway-front">
+                  <path d="M8 58 C4 35 1 15 6 3 C10 15 13 35 11 58" fill="#497c27"/>
+                  <path d="M35 58 C31 35 28 15 33 3 C37 15 40 35 38 58" fill="#497c27"/>
+                  <path d="M85 58 C81 35 78 15 83 3 C87 15 90 35 88 58" fill="#497c27"/>
+                  <path d="M140 58 C136 35 133 15 138 3 C142 15 145 35 143 58" fill="#497c27"/>
+                  <path d="M350 58 C346 35 343 15 348 3 C352 15 355 35 353 58" fill="#497c27"/>
+                  <path d="M410 58 C406 35 403 15 408 3 C412 15 415 35 413 58" fill="#497c27"/>
+                  <path d="M470 58 C466 35 463 15 468 3 C472 15 475 35 473 58" fill="#497c27"/>
+                </g>
+              </svg>
+
+              <!-- Cute Fairy Mushrooms Along the Soil -->
+              <div class="mushrooms-row">
+                <!-- M1: Red Amanita -->
+                <div class="mushroom-node" id="mushroom-1" style="left: 24px; bottom: 4px;" onclick="handleMushroom(this, 'Thầy ơi, 11A2 yêu thầy rất nhiều! 🍄')" tabindex="0" title="Cây nấm đỏ ấm áp">
+                  <svg width="24" height="30" viewBox="0 0 24 30">
+                    <rect x="9" y="16" width="6" height="14" rx="2" fill="#ebd8bf"/>
+                    <ellipse cx="12" cy="14" rx="11" ry="8.5" fill="#d32f2f"/>
+                    <circle cx="7" cy="11" r="1.8" fill="#fff"/>
+                    <circle cx="14" cy="9" r="1.6" fill="#fff"/>
+                    <circle cx="17" cy="13" r="1.4" fill="#fff"/>
+                  </svg>
+                </div>
+
+                <!-- M2: Golden Chanterelle -->
+                <div class="mushroom-node" id="mushroom-2" style="left: 78px; bottom: 4px;" onclick="handleMushroom(this, 'Chúc thầy luôn bình an và vui khỏe mỗi ngày! ☀️')" tabindex="0" title="Cây nấm vàng tươi vui">
+                  <svg width="22" height="28" viewBox="0 0 22 28">
+                    <rect x="8" y="14" width="6" height="14" rx="2" fill="#ebd8bf"/>
+                    <ellipse cx="11" cy="12" rx="10" ry="7" fill="#f57f17"/>
+                    <circle cx="8" cy="10" r="1.4" fill="#fff9c4"/>
+                    <circle cx="14" cy="9" r="1.4" fill="#fff9c4"/>
+                  </svg>
+                </div>
+
+                <!-- M3: Brown Forest Cap -->
+                <div class="mushroom-node" id="mushroom-3" style="left: 295px; bottom: 4px;" onclick="handleMushroom(this, 'Cảm ơn thầy đã luôn kiên nhẫn dạy dỗ tụi em! 🤎')" tabindex="0" title="Cây nấm nâu bền bỉ">
+                  <svg width="20" height="26" viewBox="0 0 20 26">
+                    <rect x="7" y="13" width="6" height="13" rx="2" fill="#d7ccc8"/>
+                    <ellipse cx="10" cy="11" rx="9" ry="6.5" fill="#6d4c41"/>
+                    <ellipse cx="10" cy="10" rx="6" ry="3.5" fill="#8d6e63"/>
+                  </svg>
+                </div>
+
+                <!-- M4: Coral Orange -->
+                <div class="mushroom-node" id="mushroom-4" style="left: 355px; bottom: 4px;" onclick="handleMushroom(this, 'Thầy là người thắp sáng những ước mơ! 🌟')" tabindex="0" title="Cây nấm cam nhiệt huyết">
+                  <svg width="24" height="30" viewBox="0 0 24 30">
+                    <rect x="9" y="15" width="6" height="15" rx="2" fill="#ebd8bf"/>
+                    <ellipse cx="12" cy="13" rx="11" ry="8" fill="#e65100"/>
+                    <circle cx="8" cy="10" r="1.6" fill="#ffe0b2"/>
+                    <circle cx="16" cy="10" r="1.6" fill="#ffe0b2"/>
+                  </svg>
+                </div>
+
+                <!-- M5: SECRET FAIRY MUSHROOM (Easter Egg) -->
+                <div class="mushroom-node easter-mushroom" id="mushroom-5" style="left: 200px; bottom: 5px;" onclick="handleMushroom(this, '🎉 BÍ MẬT 11A2: Dù mai này khôn lớn bay xa, tụi em mãi là học trò của Thầy! Cảm ơn Thầy vì tất cả ❤️')" tabindex="0" title="Cây nấm tím ma thuật (Bí mật!)">
+                  <div class="mushroom-secret-sparkle">✨</div>
+                  <svg width="24" height="30" viewBox="0 0 24 30">
+                    <rect x="9" y="15" width="6" height="15" rx="2" fill="#e1bee7"/>
+                    <ellipse cx="12" cy="13" rx="11" ry="8" fill="#7b1fa2"/>
+                    <circle cx="7" cy="10" r="1.5" fill="#f3e5f5"/>
+                    <circle cx="15" cy="9" r="1.5" fill="#f3e5f5"/>
+                    <circle cx="12" cy="14" r="1.2" fill="#ffd54f"/>
+                  </svg>
+                </div>
+
+                <!-- M6: Pink Bonnet -->
+                <div class="mushroom-node" id="mushroom-6" style="left: 420px; bottom: 4px;" onclick="handleMushroom(this, 'Kỷ niệm 11A2 sẽ mãi vẹn nguyên trong tim! 🌸')" tabindex="0" title="Cây nấm hồng dịu dàng">
+                  <svg width="22" height="28" viewBox="0 0 22 28">
+                    <rect x="8" y="14" width="6" height="14" rx="2" fill="#f8bbd0"/>
+                    <ellipse cx="11" cy="12" rx="10" ry="7" fill="#d81b60"/>
+                    <circle cx="7" cy="9" r="1.5" fill="#fff"/>
+                    <circle cx="15" cy="9" r="1.5" fill="#fff"/>
+                  </svg>
+                </div>
+              </div><!-- end mushrooms-row -->
+
+              <!-- Delicate Fluttering Butterfly -->
+              <div class="flying-butterfly" aria-hidden="true">
+                <svg width="24" height="18" viewBox="0 0 24 18">
+                  <g class="wing-left"><ellipse cx="6" cy="8" rx="5.5" ry="7.5" fill="#ff4081" opacity="0.85"/></g>
+                  <g class="wing-right"><ellipse cx="18" cy="8" rx="5.5" ry="7.5" fill="#ff4081" opacity="0.85"/></g>
+                  <ellipse cx="12" cy="9" rx="1.5" ry="7" fill="#311b92"/>
+                </svg>
+              </div>
+
+            </div><!-- end ground-sanctuary -->
+
+          </div><!-- end tree-stage -->
+
+          <!-- Page Corner Curl -->
+          <div class="page-corner-curl" title="Trang sổ lưu bút"></div>
+        </section>
+
+      </div><!-- end album-case -->
+    </div><!-- end album-viewport -->
+  </main>
+
+  <!-- ================= VINTAGE WISH POSTCARD MODAL ================= -->
+  <div id="wish-popup" class="wish-postcard-modal" role="dialog" aria-modal="true" aria-labelledby="wish-name" tabindex="-1">
+    <div class="postcard-wax-seal" aria-hidden="true">❤️</div>
+    <button class="postcard-close-btn" onclick="closeWish()" aria-label="Đóng thiệp chúc">✕</button>
+    
+    <div class="postcard-inner">
+      <div class="postcard-stamp">
+        <span class="stamp-text">11A2</span>
+      </div>
+      
+      <div class="postcard-to">Gửi Thầy Long kính mến,</div>
+      <div class="postcard-sender" id="wish-name">Học sinh</div>
+      <div class="postcard-flourish">~ ✿ ~</div>
+      <div class="postcard-content" id="wish-text">"Lời chúc..."</div>
+      
+      <div class="postcard-nav-bar">
+        <button class="btn-post-nav" onclick="prevWish()" aria-label="Lời chúc trước">◀ Trước</button>
+        <span class="post-counter" id="wish-counter">1 / 12</span>
+        <button class="btn-post-nav" onclick="nextWish()" aria-label="Lời chúc tiếp theo">Tiếp ▶</button>
+      </div>
+    </div>
+  </div>
+  <div id="wish-backdrop" class="modal-backdrop" onclick="closeWish()"></div>
+
+  <!-- Photo Lightbox Modal -->
+  <div id="lightbox" class="photo-lightbox" role="dialog" aria-modal="true" aria-label="Xem ảnh kỷ niệm phóng to">
+    <button class="lightbox-close-btn" onclick="closeLightbox()" aria-label="Đóng ảnh">✕</button>
+    <div class="lightbox-stage">
+      <img id="lightbox-img" src="" alt="">
+      <div id="lightbox-caption" class="lightbox-caption-text"></div>
+    </div>
+  </div>
+  <div id="lightbox-backdrop" class="modal-backdrop" onclick="closeLightbox()"></div>
+
+  <!-- Video Cinema Modal -->
+  <div id="video-modal" class="video-cinema-modal" role="dialog" aria-modal="true" aria-label="Xem video kỷ niệm lớp 11A2">
+    <div class="cinema-bezel">
+      <button class="cinema-close-btn" onclick="closeVideoModal()" aria-label="Đóng video">✕</button>
+      <div class="cinema-screen">
+        <video id="main-video" controls preload="none">
+          <source src="video.mp4" type="video/mp4">
+          Trình duyệt của bạn không hỗ trợ phát video.
+        </video>
+      </div>
+      <div class="cinema-caption">✦ Thước phim kỷ niệm Tập thể Lớp 11A2 ✦</div>
+    </div>
+  </div>
+  <div id="video-backdrop" class="modal-backdrop" onclick="closeVideoModal()"></div>
+
+  <!-- Falling Blossom Petals Canvas -->
+  <canvas id="petals-canvas" aria-hidden="true"></canvas>
+
+  <!-- Mushroom Toast Message -->
+  <div id="mushroom-msg" class="mushroom-toast" role="status" aria-live="polite"></div>
+
+  <!-- Modular Scripts -->
+  <script src="js/config.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/petals.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
