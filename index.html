@@ -25,6 +25,11 @@
       <span class="brand-title">Sổ Kỷ Niệm 11A2</span>
     </div>
     <div class="nav-actions">
+      <!-- Mobile Page Flip Toggle Pill -->
+      <button id="flip-mode-btn" class="nav-pill mobile-only-pill" onclick="toggleMobileBookMode()" aria-label="Đổi chế độ lật trang sách">
+        <span class="pill-icon">📖</span>
+        <span class="pill-text">Lật Trang</span>
+      </button>
       <button id="theme-btn" class="nav-pill" aria-label="Đổi giao diện ngày/đêm đom đóm">
         <span class="pill-icon">🌙</span>
         <span class="pill-text">Đêm Đom Đóm</span>
@@ -146,6 +151,17 @@
                 <span class="sign-name">Tập thể Học sinh Lớp 11A2 ❤️</span>
               </div>
             </div>
+
+            <!-- Mobile Page Turn CTA Button -->
+            <div class="mobile-turn-cta-wrap">
+              <button class="btn-turn-page-cta" onclick="flipToPage(2)" aria-label="Lật sang trang Cây Kỷ Niệm">
+                <span>Lật sang Vườn Cây Kỷ Niệm 🌸</span>
+                <span class="turn-arrow">→</span>
+              </button>
+              <div class="mobile-swipe-hint">
+                <span class="swipe-hand">👈</span> Vuốt sang trái để lật trang
+              </div>
+            </div>
           </article>
 
           <!-- Left Page Footer -->
@@ -163,6 +179,14 @@
         <section class="album-page page-right" aria-label="Trang Cây kỷ niệm và 12 bông hoa lời chúc">
           <div class="page-texture-overlay"></div>
           
+          <!-- Mobile Return to Page 1 Button -->
+          <div class="mobile-back-page-wrap">
+            <button class="btn-back-page-cta" onclick="flipToPage(1)" aria-label="Lật về trang Thư Tri Ân">
+              <span class="back-arrow">←</span>
+              <span>Lật về Thư Tri Ân 📜</span>
+            </button>
+          </div>
+
           <!-- Right Page Header -->
           <div class="tree-heading">
             <span class="tree-eyebrow">VƯỜN KỶ NIỆM</span>
@@ -524,6 +548,27 @@
 
       </div><!-- end album-case -->
     </div><!-- end album-viewport -->
+
+    <!-- Floating Mobile Book Page Controller (Hiển thị trên điện thoại) -->
+    <nav class="mobile-book-nav-dock" id="mobile-book-nav" aria-label="Điều khiển lật trang sổ">
+      <button class="btn-dock-nav" id="btn-dock-prev" onclick="flipToPage(1)" aria-label="Trang trước: Thư Tri Ân">
+        <span class="dock-arrow">◄</span>
+        <span class="dock-label">Thư Tri Ân</span>
+      </button>
+
+      <div class="dock-indicator" onclick="togglePageMobile()" title="Nhấn để lật trang">
+        <div class="dock-dots">
+          <span class="dock-dot active" id="dot-page-1"></span>
+          <span class="dock-dot" id="dot-page-2"></span>
+        </div>
+        <span class="dock-page-text" id="dock-page-text">Trang 1 / 2</span>
+      </div>
+
+      <button class="btn-dock-nav" id="btn-dock-next" onclick="flipToPage(2)" aria-label="Trang sau: Cây Kỷ Niệm">
+        <span class="dock-label">Cây Kỷ Niệm</span>
+        <span class="dock-arrow">►</span>
+      </button>
+    </nav>
   </main>
 
   <!-- ================= VINTAGE WISH POSTCARD MODAL ================= -->

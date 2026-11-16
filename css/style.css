@@ -1447,11 +1447,25 @@ body.night-mode .tree-title {
 }
 
 /* ============================================================
-   13. RESPONSIVE DESIGN (TABLETS & MOBILE)
+   13. RESPONSIVE DESIGN & MOBILE BOOK PAGE FLIP SYSTEM
    ============================================================ */
+
+/* Desktop only: hide mobile flip controllers */
+@media (min-width: 921px) {
+  .mobile-book-nav-dock,
+  .mobile-turn-cta-wrap,
+  .mobile-back-page-wrap,
+  .mobile-only-pill {
+    display: none !important;
+  }
+}
+
+/* Tablet & Mobile Screens (<= 920px) */
 @media (max-width: 920px) {
+  /* Default / Scroll fallback mode */
   .stage-container {
     padding: 70px 12px 30px;
+    box-sizing: border-box;
   }
 
   .album-case {
@@ -1508,24 +1522,322 @@ body.night-mode .tree-title {
   .cover-title {
     font-size: 2.2rem;
   }
+
+  /* ------------------------------------------------------------
+     MOBILE PAGE FLIP MODE (CHẾ ĐỘ LẬT TRANG SÁCH TRÊN ĐIỆN THOẠI)
+     ------------------------------------------------------------ */
+  body.mobile-flip-active .stage-container {
+    padding: 60px 8px 75px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+  }
+
+  body.mobile-flip-active .album-viewport {
+    perspective: 2000px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  body.mobile-flip-active .album-case {
+    position: relative;
+    width: min(560px, 98vw);
+    height: min(720px, calc(100vh - 140px));
+    min-height: 520px;
+    flex-direction: row;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow:
+      0 20px 50px rgba(0, 0, 0, 0.55),
+      0 8px 20px rgba(25, 10, 4, 0.3),
+      0 0 0 1px rgba(212, 163, 57, 0.35);
+    transform-style: preserve-3d;
+  }
+
+  body.mobile-flip-active .album-spine {
+    display: none;
+  }
+
+  body.mobile-flip-active .silk-ribbon {
+    display: none;
+  }
+
+  /* Each page is an absolute layer inside the single-page book viewport */
+  body.mobile-flip-active .album-page {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    border-radius: 14px;
+    box-sizing: border-box;
+    backface-visibility: hidden;
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease, box-shadow 0.6s ease;
+    will-change: transform, opacity;
+  }
+
+  /* Page Left (Trang 1: Bức Thư Tri Ân) */
+  body.mobile-flip-active .page-left {
+    padding: 20px 18px 28px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    z-index: 5;
+    transform-origin: left center;
+  }
+
+  body.mobile-flip-active .page-left.active-page {
+    transform: translateX(0) rotateY(0deg);
+    opacity: 1;
+    pointer-events: auto;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
+  }
+
+  body.mobile-flip-active .page-left.flipped-away {
+    transform: translateX(-104%) rotateY(-25deg);
+    opacity: 0;
+    pointer-events: none;
+    box-shadow: 15px 0 35px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Page Right (Trang 2: Vườn Cây Kỷ Niệm) */
+  body.mobile-flip-active .page-right {
+    padding: 10px 10px 6px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    z-index: 5;
+    transform-origin: right center;
+  }
+
+  body.mobile-flip-active .page-right.parked-page {
+    transform: translateX(104%) rotateY(25deg);
+    opacity: 0;
+    pointer-events: none;
+    box-shadow: -15px 0 35px rgba(0, 0, 0, 0.5);
+  }
+
+  body.mobile-flip-active .page-right.active-page {
+    transform: translateX(0) rotateY(0deg);
+    opacity: 1;
+    pointer-events: auto;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
+  }
+
+  body.mobile-flip-active .tree-stage {
+    min-height: 0;
+    flex: 1;
+    height: 100%;
+  }
+
+  /* Mobile In-Page Turn CTA Button inside Page 1 */
+  .mobile-turn-cta-wrap {
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px dashed rgba(212, 163, 57, 0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn-turn-page-cta {
+    width: 100%;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #44240d 0%, #251204 100%);
+    color: var(--gold-bright);
+    border: 1.5px solid var(--gold-primary);
+    border-radius: 25px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 6px 18px rgba(37, 18, 4, 0.4);
+    transition: all 0.25s var(--ease-spring);
+  }
+
+  .btn-turn-page-cta:hover,
+  .btn-turn-page-cta:active {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 24px rgba(212, 163, 57, 0.4);
+    background: linear-gradient(135deg, #5f3414 0%, #371b07 100%);
+  }
+
+  .btn-turn-page-cta .turn-arrow {
+    font-size: 1.2rem;
+    transition: transform 0.25s ease;
+  }
+
+  .btn-turn-page-cta:hover .turn-arrow {
+    transform: translateX(4px);
+  }
+
+  .mobile-swipe-hint {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-style: italic;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .swipe-hand {
+    display: inline-block;
+    animation: swipeHintMotion 2s ease-in-out infinite;
+  }
+
+  @keyframes swipeHintMotion {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(-8px); }
+  }
+
+  /* Mobile Back Page Button inside Page 2 */
+  .mobile-back-page-wrap {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 4px;
+    position: relative;
+    z-index: 15;
+  }
+
+  .btn-back-page-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid rgba(138, 90, 43, 0.25);
+    border-radius: 16px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.76rem;
+    font-weight: 700;
+    color: #44240d;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.2s ease;
+  }
+
+  body.night-mode .btn-back-page-cta {
+    background: rgba(25, 45, 70, 0.88);
+    color: #e6f1ff;
+    border-color: rgba(144, 202, 249, 0.3);
+  }
+
+  .btn-back-page-cta:hover,
+  .btn-back-page-cta:active {
+    background: var(--gold-primary);
+    color: #fff;
+    transform: translateX(-3px);
+  }
+
+  /* Fixed/Floating Bottom Navigation Dock */
+  .mobile-book-nav-dock {
+    position: fixed;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 400;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(35, 17, 7, 0.94);
+    border: 1.5px solid var(--gold-primary);
+    border-radius: 30px;
+    padding: 6px 14px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.55), 0 0 15px rgba(212, 163, 57, 0.25);
+    backdrop-filter: blur(12px);
+    width: auto;
+    max-width: 94vw;
+  }
+
+  .btn-dock-nav {
+    background: transparent;
+    border: none;
+    color: var(--gold-bright);
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 0.82rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 10px;
+    border-radius: 20px;
+    transition: all 0.2s ease;
+  }
+
+  .btn-dock-nav:hover,
+  .btn-dock-nav:active {
+    background: rgba(212, 163, 57, 0.25);
+    color: #fff;
+  }
+
+  .btn-dock-nav.disabled {
+    opacity: 0.35;
+    pointer-events: none;
+  }
+
+  .dock-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    padding: 0 6px;
+    user-select: none;
+  }
+
+  .dock-dots {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 2px;
+  }
+
+  .dock-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transition: all 0.3s var(--ease-spring);
+  }
+
+  .dock-dot.active {
+    background: var(--gold-primary);
+    width: 18px;
+    border-radius: 4px;
+    box-shadow: 0 0 8px var(--gold-primary);
+  }
+
+  .dock-page-text {
+    font-size: 0.7rem;
+    color: var(--gold-bright);
+    font-weight: 600;
+    white-space: nowrap;
+  }
 }
 
 @media (max-width: 480px) {
   .top-nav {
-    padding: 6px 12px;
+    padding: 6px 10px;
   }
 
   .brand-title {
-    font-size: 1.05rem;
+    font-size: 0.98rem;
   }
 
   .nav-pill {
-    padding: 5px 10px;
-    font-size: 0.75rem;
+    padding: 4px 8px;
+    font-size: 0.72rem;
   }
 
   .script-title {
-    font-size: 1.8rem;
+    font-size: 1.7rem;
   }
 
   .callout-poem {
@@ -1536,11 +1848,11 @@ body.night-mode .tree-title {
     flex-direction: column;
     text-align: center;
     gap: 8px;
-    padding: 12px;
+    padding: 10px;
   }
 
   .tree-title {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
   }
 
   .blossom-bloom {
@@ -1554,8 +1866,17 @@ body.night-mode .tree-title {
   }
 
   .blossom-tag {
-    font-size: 0.82rem;
+    font-size: 0.8rem;
     padding: 1px 6px;
+  }
+
+  .btn-dock-nav {
+    font-size: 0.75rem;
+    padding: 5px 8px;
+  }
+
+  .dock-page-text {
+    font-size: 0.65rem;
   }
 }
 

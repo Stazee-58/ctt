@@ -46,6 +46,42 @@ function playMagicChord() {
   } catch(e) {}
 }
 
+// Realistic soft paper page flip sound
+function playPageFlipSound() {
+  try {
+    const ctx = getAudioContext();
+    const now = ctx.currentTime;
+    
+    // Low swoosh frequency sweep
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    const filter = ctx.createBiquadFilter();
+
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(160, now);
+    osc.frequency.exponentialRampToValueAtTime(320, now + 0.08);
+    osc.frequency.exponentialRampToValueAtTime(80, now + 0.22);
+
+    filter.type = 'lowpass';
+    filter.frequency.setValueAtTime(800, now);
+
+    gain.gain.setValueAtTime(0.01, now);
+    gain.gain.linearRampToValueAtTime(0.12, now + 0.05);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+
+    osc.connect(filter);
+    filter.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start(now);
+    osc.stop(now + 0.28);
+
+    setTimeout(() => {
+      playChime(580);
+    }, 100);
+  } catch(e) {}
+}
+
 // ============================================================
 // 2. MUSIC PLAYER TOGGLE
 // ============================================================

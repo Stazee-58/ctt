@@ -53,6 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
   createDustMotes();
   setupParallax();
   setupThemeToggle();
+  initMobileBook();
 });
 
 // ============================================================
@@ -295,5 +296,170 @@ function createDustMotes() {
       animation-delay: ${Math.random() * 8}s;
     `;
     container.appendChild(mote);
+  }
+}
+
+// ============================================================
+// 9. MOBILE BOOK PAGE FLIP SYSTEM (Lật trang sách trên điện thoại)
+// ============================================================
+let currentMobilePage = 1; // 1 = Thư Tri Ân, 2 = Cây Kỷ Niệm
+let isMobileFlipMode = true; // Mặc định BẬT chế độ lật trang trên điện thoại
+let touchStartX = 0;
+let touchStartY = 0;
+let touchEndX = 0;
+let touchEndY = 0;
+
+function initMobileBook() {
+  if (window.innerWidth <= 920) {
+    document.body.classList.add('mobile-flip-active');
+    updateMobilePageUI();
+    setupMobileSwipeGestures();
+  } else {
+    document.body.classList.remove('mobile-flip-active');
+  }
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth <= 920) {
+      if (isMobileFlipMode && !document.body.classList.contains('mobile-flip-active')) {
+        document.body.classList.add('mobile-flip-active');
+        updateMobilePageUI();
+      }
+    } else {
+      document.body.classList.remove('mobile-flip-active');
+    }
+  });
+}
+
+function flipToPage(pageNum) {
+  if (pageNum === currentMobilePage) return;
+  currentMobilePage = pageNum;
+
+  // Phát âm thanh lật trang nhẹ nhàng
+  if (typeof playPageFlipSound === 'function') {
+    playPageFlipSound();
+  }
+
+  updateMobilePageUI();
+
+  // Scroll to top of the newly displayed page
+  if (pageNum === 1) {
+    const pageLeft = document.querySelector('.page-left');
+    if (pageLeft) pageLeft.scrollTop = 0;
+  }
+}
+
+function togglePageMobile() {
+  flipToPage(currentMobilePage === 1 ? 2 : 1);
+}
+
+function updateMobilePageUI() {
+  const pageLeft = document.querySelector('.page-left');
+  const pageRight = document.querySelector('.page-right');
+  const dot1 = document.getElementById('dot-page-1');
+  const dot2 = document.getElementById('dot-page-2');
+  const pageText = document.getElementById('dock-page-text');
+  const btnPrev = document.getElementById('btn-dock-prev');
+  const btnNext = document.getElementById('btn-dock-next');
+
+  if (!pageLeft || !pageRight) return;
+
+  if (document.body.classList.contains('mobile-flip-active')) {
+    if (currentMobilePage === 1) {
+      pageLeft.classList.add('active-page');
+      pageLeft.classList.remove('flipped-away');
+      pageRight.classList.remove('active-page');
+      pageRight.classList.add('parked-page');
+
+      if (dot1) dot1.classList.add('active');
+      if (dot2) dot2.classList.remove('active');
+      if (pageText) pageText.textContent = "Trang 1 / 2: Thư Tri Ân";
+      if (btnPrev) { btnPrev.disabled = true; btnPrev.classList.add('disabled'); }
+      if (btnNext) { btnNext.disabled = false; btnNext.classList.remove('disabled'); }
+    } else {
+      pageLeft.classList.remove('active-page');
+      pageLeft.classList.add('flipped-away');
+      pageRight.classList.add('active-page');
+      pageRight.classList.remove('parked-page');
+
+      if (dot1) dot1.classList.remove('active');
+      if (dot2) dot2.classList.add('active');
+      if (pageText) pageText.textContent = "Trang 2 / 2: Cây Kỷ Niệm 🌸";
+      if (btnPrev) { btnPrev.disabled = false; btnPrev.classList.remove('disabled'); }
+      if (btnNext) { btnNext.disabled = true; btnNext.classList.add('disabled'); }
+    }
+  } else {
+    // Chế độ cuộn: gỡ bỏ các lớp lật trang
+    pageLeft.classList.remove('active-page', 'flipped-away');
+    pageRight.classList.remove('active-page', 'parked-page');
+  }
+}
+
+function toggleMobileBookMode() {
+  isMobileFlipMode = !isMobileFlipMode;
+  document.body.classList.toggle('mobile-flip-active', isMobileFlipMode);
+  
+  const pillIcon = document.querySelector('#flip-mode-btn .pill-icon');
+  const pillText = document.querySelector('#flip-mode-btn .pill-text');
+
+  if (isMobileFlipMode) {
+    if (pillIcon) pillIcon.textContent = '📖';
+    if (pillText) pillText.textContent = 'Lật Trang';
+    updateMobilePageUI();
+    showMobileNotice("Đã bật Chế độ Lật Trang Sách 📖");
+  } else {
+    if (pillIcon) pillIcon.textContent = '📜';
+    if (pillText) pillText.textContent = 'Cuộn Sách';
+    updateMobilePageUI();
+    showMobileNotice("Đã chuyển sang Chế độ Cuộn Dọc 📜");
+  }
+}
+
+function showMobileNotice(msg) {
+  const toast = document.getElementById('mushroom-msg');
+  if (toast) {
+    toast.textContent = msg;
+    toast.classList.add('visible');
+    setTimeout(() => toast.classList.remove('visible'), 2800);
+  }
+}
+
+function setupMobileSwipeGestures() {
+  const mainBook = document.getElementById('main-book');
+  if (!mainBook) return;
+
+  mainBook.addEventListener('touchstart', (e) => {
+    if (!e.changedTouches || e.changedTouches.length === 0) return;
+    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
+  }, { passive: true });
+
+  mainBook.addEventListener('touchend', (e) => {
+    if (!e.changedTouches || e.changedTouches.length === 0) return;
+    touchEndX = e.changedTouches[0].screenX;
+    touchEndY = e.changedTouches[0].screenY;
+    handleMobileSwipe();
+  }, { passive: true });
+}
+
+function handleMobileSwipe() {
+  if (!document.body.classList.contains('mobile-flip-active')) return;
+  if (isWishOpen) return; // Đang xem thiệp hoa thì không lật trang
+
+  const deltaX = touchEndX - touchStartX;
+  const deltaY = touchEndY - touchStartY;
+
+  // Vuốt ngang chủ đạo và vượt ngưỡng 40px
+  if (Math.abs(deltaX) > Math.abs(deltaY) * 1.2 && Math.abs(deltaX) > 40) {
+    if (deltaX < 0) {
+      // Vuốt sang trái -> Sang Trang 2 (Cây Kỷ Niệm)
+      if (currentMobilePage === 1) {
+        flipToPage(2);
+      }
+    } else {
+      // Vuốt sang phải -> Về Trang 1 (Thư Tri Ân)
+      if (currentMobilePage === 2) {
+        flipToPage(1);
+      }
+    }
   }
 }
