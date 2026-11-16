@@ -156,7 +156,7 @@ function renderWish() {
   const counterEl = document.getElementById('wish-counter');
 
   if (toEl) {
-    toEl.textContent = wish.to || "Gửi Thầy Long kính mến,";
+    toEl.textContent = wish.to || "Gửi Thầy Cô kính mến,";
   }
 
   if (nameEl) {
