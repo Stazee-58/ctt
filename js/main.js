@@ -45,10 +45,19 @@ document.addEventListener('DOMContentLoaded', () => {
       const node = document.getElementById(`flower-${idx}`);
       if (node) {
         const tag = node.querySelector('.blossom-tag');
-        if (tag && idx !== 11) {
-          tag.textContent = (idx === 0) ? "Hiểu Minh" : "11A2";
+        if (tag) {
+          if (idx === 0) {
+            tag.textContent = "Hiểu Minh";
+            tag.style.display = '';
+          } else if (idx === 11) {
+            tag.textContent = "✦ 11A2 ✦";
+            tag.style.display = '';
+          } else {
+            tag.textContent = '';
+            tag.style.display = 'none';
+          }
         }
-        node.setAttribute('aria-label', `Lời chúc từ ${wish.name}`);
+        node.setAttribute('aria-label', (idx === 0) ? "Lời chúc của Hiểu Minh" : (idx === 11 ? "Lời chúc của Tập thể 11A2" : `Thông điệp tri ân số ${idx}`));
       }
     });
   }
@@ -141,11 +150,25 @@ function renderWish() {
   const wish = CONFIG.wishes[currentWishIndex];
   if (!wish) return;
   
+  const toEl = document.getElementById('wish-to');
   const nameEl = document.getElementById('wish-name');
   const textEl = document.getElementById('wish-text');
   const counterEl = document.getElementById('wish-counter');
 
-  if (nameEl) nameEl.textContent = wish.name;
+  if (toEl) {
+    toEl.textContent = wish.to || "Gửi Thầy Long kính mến,";
+  }
+
+  if (nameEl) {
+    if (wish.name && wish.name.trim()) {
+      nameEl.textContent = wish.name;
+      nameEl.style.display = 'block';
+    } else {
+      nameEl.textContent = '';
+      nameEl.style.display = 'none';
+    }
+  }
+
   if (textEl) textEl.textContent = `“${wish.text}”`;
   if (counterEl) counterEl.textContent = `${currentWishIndex + 1} / ${CONFIG.wishes.length}`;
 }

@@ -21,52 +21,76 @@ const CONFIG = {
   musicSrc: "music.mp3",                   // Nhạc nền (tùy chọn)
   wishes: [
     {
+      id: 0,
       name: "Hiểu Minh",
-      text: "Chúc thầy cô trăm năm hạnh phúc, luôn dồi dào sức khỏe, bình an và ngập tràn niềm vui ạ! ❤️"
+      to: "Gửi Thầy Long kính mến,",
+      text: "Chúc thầy mau ăn chóng lớn, phát tài phát lộc, tiền vào như nước, sống lâu trăm tuổi, trăm năm hạnh phúc! ❤️"
     },
     {
-      name: "Học sinh 11A2",
-      text: "Thầy cô là người đầu tiên tin vào em khi chính em còn hoài nghi bản thân. Những lần thầy cô dừng lại hỏi 'Em ổn không?' – em sẽ không bao giờ quên. Cảm ơn thầy cô từ tận đáy lòng!"
+      id: 1,
+      name: "",
+      to: "Tri Ân Thầy Cô,",
+      text: "Người lái đò thầm lặng – Vững tay chèo đưa thế hệ tương lai cập bến."
     },
     {
-      name: "Học sinh 11A2",
-      text: "Thầy cô không chỉ dạy tụi em tri thức trong sách vở, mà bài học làm người còn sâu sắc hơn ngàn lần. Tụi em học được rất nhiều điều quý giá từ thầy cô. Chúc thầy cô mãi giữ ngọn lửa nhiệt huyết!"
+      id: 2,
+      name: "",
+      to: "Tri Ân Thầy Cô,",
+      text: "Tri thức thắp sáng tương lai – Công ơn khắc ghi suốt đời."
     },
     {
-      name: "Học sinh 11A2",
-      text: "Có những buổi chiều muộn tan trường, thầy cô vẫn nán lại lắng nghe những băn khoăn tuổi học trò của tụi em. Cảm ơn thầy cô vì đã luôn kiên nhẫn và bao dung như người cha, người mẹ thứ hai."
+      id: 3,
+      name: "",
+      to: "Tri Ân Thầy Cô,",
+      text: "Nghề cao quý nhất trong các nghề cao quý – Tôn vinh Người đưa đò."
     },
     {
-      name: "Học sinh 11A2",
-      text: "Em nhớ nhất nụ cười hiền của thầy cô mỗi khi lớp bày trò ngớ ngẩn. Thầy cô không la mắng mà chỉ nhẹ nhàng chỉ bảo. Cảm ơn thầy cô đã luôn đồng hành cùng tập thể 11A2 này!"
+      id: 4,
+      name: "",
+      to: "Tri Ân Thầy Cô,",
+      text: "Thầy cô là ngọn lửa sưởi ấm tri thức, là ánh sáng dẫn lối tương lai."
     },
     {
-      name: "Học sinh 11A2",
-      text: "Lời thầy cô dặn: 'Vấp ngã không phải là dấu chấm hết, mà là bước đệm để vươn cao hơn' sẽ là hành trang theo em suốt cuộc đời. Cảm ơn người thầy, người cô truyền cảm hứng tuyệt vời của chúng em!"
+      id: 5,
+      name: "",
+      to: "Tri Ân Thầy Cô,",
+      text: "20/11 – Tri ân thầy cô, kết nối yêu thương!"
     },
     {
-      name: "Học sinh 11A2",
-      text: "11A2 mà không có thầy cô thì chắc loạn lắm thầy cô ơi! Cảm ơn thầy cô đã dẫn dắt tụi em suốt năm học qua. Chúc thầy cô luôn thật nhiều sức khỏe và niềm vui mỗi ngày nhé!"
+      id: 6,
+      name: "",
+      to: "Tri Ân Thầy Cô,",
+      text: "Học hết mình, nhớ ơn sâu – Tự hào học trò của thầy cô!"
     },
     {
-      name: "Học sinh 11A2",
-      text: "Mỗi sáng thứ Hai nhìn thấy nụ cười rạng rỡ của thầy cô, tụi em như được tiếp thêm 100% năng lượng. Thầy cô chính là ánh nắng ấm áp nhất của tập thể 11A2!"
+      id: 7,
+      name: "",
+      to: "Tri Ân Thầy Cô,",
+      text: "Mỗi bài học là một bước chân vững vàng – Cảm ơn thầy cô đã đồng hành!"
     },
     {
-      name: "Học sinh 11A2",
-      text: "Thầy cô là người thắp sáng ước mơ cho từng bạn trong lớp. Cảm ơn thầy cô từ những trái tim nhỏ bé nhưng đong đầy lòng biết ơn của tập thể 11A2!"
+      id: 8,
+      name: "",
+      to: "Tri Ân Thầy Cô,",
+      text: "Tôn sư trọng đạo – Nét đẹp ngàn đời của tuổi trẻ chúng ta."
     },
     {
-      name: "Học sinh 11A2",
-      text: "Những lần em chưa ngoan, thầy cô không phạt nặng mà chỉ nhẹ nhàng ân cần chỉ bảo. Sự bao dung của thầy cô làm em cảm động vô cùng. Em hứa sẽ cố gắng nhiều hơn để không phụ công ơn thầy cô!"
+      id: 9,
+      name: "",
+      to: "Tri Ân Thầy Cô,",
+      text: "20/11: Tri ân người gieo hạt giống tâm hồn!"
     },
     {
-      name: "Học sinh 11A2",
-      text: "Mỗi tiết sinh hoạt lớp đều ngập tràn tiếng cười và bài học sâu sắc. Kính chúc thầy cô và gia đình luôn an khang, hạnh phúc và vạn sự như ý!"
+      id: 10,
+      name: "",
+      to: "Tri Ân Thầy Cô,",
+      text: "Chắp cánh ước mơ – Vững bước tương lai cùng thầy cô."
     },
     {
+      id: 11,
       name: "Tập thể 11A2",
-      text: "Thầy cô kính mến! Một năm qua thầy cô đã vun vén cho cây non 11A2 lớn lên từng ngày. Dẫu mai này mỗi đứa một phương trời, hình bóng thầy cô tận tụy sẽ mãi in đậm trong ký ức thanh xuân đẹp nhất của chúng em. Yêu thầy cô rất nhiều! ❤️"
+      to: "Gửi Thầy Long kính mến,",
+      text: "Gửi Thầy Long kính mến! Tập thể 11A2 chúng em xin gửi ngàn lời tri ân sâu sắc nhất tới Thầy. Cảm ơn Thầy đã luôn kiên nhẫn chỉ dạy, tận tụy dìu dắt và đồng hành cùng chúng em qua từng ngày tháng thanh xuân rực rỡ dưới mái trường. Kính chúc Thầy luôn dồi dào sức khỏe, niềm vui, bình an và luôn giữ mãi ngọn lửa nhiệt huyết với sự nghiệp trồng người. Tập thể 11A2 mãi yêu và kính trọng Thầy! ❤️"
     }
   ]
 };
