@@ -210,6 +210,10 @@
 
                 <!-- Layer 1: Deep Background Canopy Foliage -->
                 <g class="canopy-group canopy-sway-1">
+                  <!-- Crown top foliage filling the upper canopy -->
+                  <ellipse cx="250" cy="85" rx="130" ry="70" fill="url(#cg-deep)"/>
+                  <ellipse cx="170" cy="75" rx="85" ry="55" fill="url(#cg-deep)"/>
+                  <ellipse cx="330" cy="75" rx="85" ry="55" fill="url(#cg-deep)"/>
                   <ellipse cx="110" cy="205" rx="95" ry="75" fill="url(#cg-deep)"/>
                   <ellipse cx="390" cy="200" rx="95" ry="75" fill="url(#cg-deep)"/>
                   <ellipse cx="250" cy="140" rx="140" ry="100" fill="url(#cg-deep)"/>
@@ -263,6 +267,10 @@
 
                 <!-- Layer 3: Middle Foliage Wrapping Branches -->
                 <g class="canopy-group canopy-sway-2">
+                  <!-- Crown mid foliage -->
+                  <ellipse cx="250" cy="65" rx="110" ry="52" fill="url(#cg-mid)"/>
+                  <ellipse cx="180" cy="60" rx="70" ry="42" fill="url(#cg-mid)"/>
+                  <ellipse cx="320" cy="60" rx="70" ry="42" fill="url(#cg-mid)"/>
                   <ellipse cx="145" cy="170" rx="85" ry="60" fill="url(#cg-mid)"/>
                   <ellipse cx="355" cy="165" rx="85" ry="60" fill="url(#cg-mid)"/>
                   <ellipse cx="250" cy="115" rx="115" ry="75" fill="url(#cg-mid)"/>
@@ -273,11 +281,19 @@
 
                 <!-- Layer 4: Sunlit Front Foliage and Sparkles -->
                 <g class="canopy-group canopy-sway-3">
+                  <!-- Crown sunlit high domes -->
+                  <ellipse cx="250" cy="45" rx="80" ry="36" fill="url(#cg-light)"/>
+                  <ellipse cx="250" cy="35" rx="60" ry="26" fill="url(#cg-sun)"/>
+                  <ellipse cx="190" cy="46" rx="50" ry="30" fill="url(#cg-light)"/>
+                  <ellipse cx="310" cy="46" rx="50" ry="30" fill="url(#cg-light)"/>
                   <ellipse cx="215" cy="85" rx="75" ry="52" fill="url(#cg-light)"/>
                   <ellipse cx="285" cy="80" rx="72" ry="50" fill="url(#cg-light)"/>
                   <ellipse cx="255" cy="65" rx="62" ry="42" fill="url(#cg-sun)"/>
                   <ellipse cx="105" cy="95" rx="50" ry="36" fill="url(#cg-light)"/>
                   <ellipse cx="365" cy="70" rx="52" ry="38" fill="url(#cg-light)"/>
+                  <circle cx="250" cy="25" r="7" fill="#d2fba4" opacity="0.85"/>
+                  <circle cx="215" cy="38" r="5.5" fill="#d2fba4" opacity="0.75"/>
+                  <circle cx="285" cy="35" r="6" fill="#d2fba4" opacity="0.75"/>
                   <circle cx="255" cy="55" r="8" fill="#d2fba4" opacity="0.8"/>
                   <circle cx="210" cy="65" r="6" fill="#d2fba4" opacity="0.7"/>
                   <circle cx="295" cy="62" r="6.5" fill="#d2fba4" opacity="0.7"/>
@@ -399,106 +415,106 @@
 
               </div><!-- end blossoms-layer -->
 
-            </div><!-- end tree-canvas-box -->
-
-            <!-- Ground Layer with Grass, Fairy Mushrooms & Butterfly -->
-            <div class="ground-sanctuary" aria-hidden="true">
-              
-              <!-- Watercolor Grass SVG -->
-              <svg class="grass-meadow-svg" viewBox="0 0 500 60" fill="none">
-                <g class="grass-sway-back">
-                  <path d="M15 55 C12 35 8 18 14 6 C17 18 20 35 19 55" fill="#689f38"/>
-                  <path d="M55 55 C52 35 48 18 54 6 C57 18 60 35 59 55" fill="#689f38"/>
-                  <path d="M110 55 C107 35 103 18 109 6 C112 18 115 35 114 55" fill="#689f38"/>
-                  <path d="M380 55 C377 35 373 18 379 6 C382 18 385 35 384 55" fill="#689f38"/>
-                  <path d="M440 55 C437 35 433 18 439 6 C442 18 445 35 444 55" fill="#689f38"/>
-                </g>
-                <g class="grass-sway-front">
-                  <path d="M8 58 C4 35 1 15 6 3 C10 15 13 35 11 58" fill="#497c27"/>
-                  <path d="M35 58 C31 35 28 15 33 3 C37 15 40 35 38 58" fill="#497c27"/>
-                  <path d="M85 58 C81 35 78 15 83 3 C87 15 90 35 88 58" fill="#497c27"/>
-                  <path d="M140 58 C136 35 133 15 138 3 C142 15 145 35 143 58" fill="#497c27"/>
-                  <path d="M350 58 C346 35 343 15 348 3 C352 15 355 35 353 58" fill="#497c27"/>
-                  <path d="M410 58 C406 35 403 15 408 3 C412 15 415 35 413 58" fill="#497c27"/>
-                  <path d="M470 58 C466 35 463 15 468 3 C472 15 475 35 473 58" fill="#497c27"/>
-                </g>
-              </svg>
-
-              <!-- Cute Fairy Mushrooms Along the Soil -->
-              <div class="mushrooms-row">
-                <!-- M1: Red Amanita -->
-                <div class="mushroom-node" id="mushroom-1" style="left: 24px; bottom: 4px;" onclick="handleMushroom(this, 'Thầy cô ơi, 11A2 yêu thầy cô rất nhiều! 🍄')" tabindex="0" title="Cây nấm đỏ ấm áp">
-                  <svg width="24" height="30" viewBox="0 0 24 30">
-                    <rect x="9" y="16" width="6" height="14" rx="2" fill="#ebd8bf"/>
-                    <ellipse cx="12" cy="14" rx="11" ry="8.5" fill="#d32f2f"/>
-                    <circle cx="7" cy="11" r="1.8" fill="#fff"/>
-                    <circle cx="14" cy="9" r="1.6" fill="#fff"/>
-                    <circle cx="17" cy="13" r="1.4" fill="#fff"/>
-                  </svg>
-                </div>
-
-                <!-- M2: Golden Chanterelle -->
-                <div class="mushroom-node" id="mushroom-2" style="left: 78px; bottom: 4px;" onclick="handleMushroom(this, 'Chúc thầy cô luôn bình an và vui khỏe mỗi ngày! ☀️')" tabindex="0" title="Cây nấm vàng tươi vui">
-                  <svg width="22" height="28" viewBox="0 0 22 28">
-                    <rect x="8" y="14" width="6" height="14" rx="2" fill="#ebd8bf"/>
-                    <ellipse cx="11" cy="12" rx="10" ry="7" fill="#f57f17"/>
-                    <circle cx="8" cy="10" r="1.4" fill="#fff9c4"/>
-                    <circle cx="14" cy="9" r="1.4" fill="#fff9c4"/>
-                  </svg>
-                </div>
-
-                <!-- M3: Brown Forest Cap -->
-                <div class="mushroom-node" id="mushroom-3" style="left: 295px; bottom: 4px;" onclick="handleMushroom(this, 'Cảm ơn thầy cô đã luôn kiên nhẫn dạy dỗ tụi em! 🤎')" tabindex="0" title="Cây nấm nâu bền bỉ">
-                  <svg width="20" height="26" viewBox="0 0 20 26">
-                    <rect x="7" y="13" width="6" height="13" rx="2" fill="#d7ccc8"/>
-                    <ellipse cx="10" cy="11" rx="9" ry="6.5" fill="#6d4c41"/>
-                    <ellipse cx="10" cy="10" rx="6" ry="3.5" fill="#8d6e63"/>
-                  </svg>
-                </div>
-
-                <!-- M4: Coral Orange -->
-                <div class="mushroom-node" id="mushroom-4" style="left: 355px; bottom: 4px;" onclick="handleMushroom(this, 'Thầy cô là người thắp sáng những ước mơ! 🌟')" tabindex="0" title="Cây nấm cam nhiệt huyết">
-                  <svg width="24" height="30" viewBox="0 0 24 30">
-                    <rect x="9" y="15" width="6" height="15" rx="2" fill="#ebd8bf"/>
-                    <ellipse cx="12" cy="13" rx="11" ry="8" fill="#e65100"/>
-                    <circle cx="8" cy="10" r="1.6" fill="#ffe0b2"/>
-                    <circle cx="16" cy="10" r="1.6" fill="#ffe0b2"/>
-                  </svg>
-                </div>
-
-                <!-- M5: SECRET FAIRY MUSHROOM (Easter Egg) -->
-                <div class="mushroom-node easter-mushroom" id="mushroom-5" style="left: 200px; bottom: 5px;" onclick="handleMushroom(this, '🎉 BÍ MẬT 11A2: Dù mai này khôn lớn bay xa, tụi em mãi là học trò của Thầy Cô! Cảm ơn Thầy Cô vì tất cả ❤️')" tabindex="0" title="Cây nấm tím ma thuật (Bí mật!)">
-                  <div class="mushroom-secret-sparkle">✨</div>
-                  <svg width="24" height="30" viewBox="0 0 24 30">
-                    <rect x="9" y="15" width="6" height="15" rx="2" fill="#e1bee7"/>
-                    <ellipse cx="12" cy="13" rx="11" ry="8" fill="#7b1fa2"/>
-                    <circle cx="7" cy="10" r="1.5" fill="#f3e5f5"/>
-                    <circle cx="15" cy="9" r="1.5" fill="#f3e5f5"/>
-                    <circle cx="12" cy="14" r="1.2" fill="#ffd54f"/>
-                  </svg>
-                </div>
-
-                <!-- M6: Pink Bonnet -->
-                <div class="mushroom-node" id="mushroom-6" style="left: 420px; bottom: 4px;" onclick="handleMushroom(this, 'Kỷ niệm 11A2 sẽ mãi vẹn nguyên trong tim! 🌸')" tabindex="0" title="Cây nấm hồng dịu dàng">
-                  <svg width="22" height="28" viewBox="0 0 22 28">
-                    <rect x="8" y="14" width="6" height="14" rx="2" fill="#f8bbd0"/>
-                    <ellipse cx="11" cy="12" rx="10" ry="7" fill="#d81b60"/>
-                    <circle cx="7" cy="9" r="1.5" fill="#fff"/>
-                    <circle cx="15" cy="9" r="1.5" fill="#fff"/>
-                  </svg>
-                </div>
-              </div><!-- end mushrooms-row -->
-
-              <!-- Delicate Fluttering Butterfly -->
-              <div class="flying-butterfly" aria-hidden="true">
-                <svg width="24" height="18" viewBox="0 0 24 18">
-                  <g class="wing-left"><ellipse cx="6" cy="8" rx="5.5" ry="7.5" fill="#ff4081" opacity="0.85"/></g>
-                  <g class="wing-right"><ellipse cx="18" cy="8" rx="5.5" ry="7.5" fill="#ff4081" opacity="0.85"/></g>
-                  <ellipse cx="12" cy="9" rx="1.5" ry="7" fill="#311b92"/>
+              <!-- Ground Layer with Grass, Fairy Mushrooms & Butterfly -->
+              <div class="ground-sanctuary" aria-hidden="true">
+                
+                <!-- Watercolor Grass SVG -->
+                <svg class="grass-meadow-svg" viewBox="0 0 500 60" fill="none">
+                  <g class="grass-sway-back">
+                    <path d="M15 55 C12 35 8 18 14 6 C17 18 20 35 19 55" fill="#689f38"/>
+                    <path d="M55 55 C52 35 48 18 54 6 C57 18 60 35 59 55" fill="#689f38"/>
+                    <path d="M110 55 C107 35 103 18 109 6 C112 18 115 35 114 55" fill="#689f38"/>
+                    <path d="M380 55 C377 35 373 18 379 6 C382 18 385 35 384 55" fill="#689f38"/>
+                    <path d="M440 55 C437 35 433 18 439 6 C442 18 445 35 444 55" fill="#689f38"/>
+                  </g>
+                  <g class="grass-sway-front">
+                    <path d="M8 58 C4 35 1 15 6 3 C10 15 13 35 11 58" fill="#497c27"/>
+                    <path d="M35 58 C31 35 28 15 33 3 C37 15 40 35 38 58" fill="#497c27"/>
+                    <path d="M85 58 C81 35 78 15 83 3 C87 15 90 35 88 58" fill="#497c27"/>
+                    <path d="M140 58 C136 35 133 15 138 3 C142 15 145 35 143 58" fill="#497c27"/>
+                    <path d="M350 58 C346 35 343 15 348 3 C352 15 355 35 353 58" fill="#497c27"/>
+                    <path d="M410 58 C406 35 403 15 408 3 C412 15 415 35 413 58" fill="#497c27"/>
+                    <path d="M470 58 C466 35 463 15 468 3 C472 15 475 35 473 58" fill="#497c27"/>
+                  </g>
                 </svg>
-              </div>
 
-            </div><!-- end ground-sanctuary -->
+                <!-- Cute Fairy Mushrooms Along the Soil -->
+                <div class="mushrooms-row">
+                  <!-- M1: Red Amanita -->
+                  <div class="mushroom-node" id="mushroom-1" style="left: 5%; bottom: 4px;" onclick="handleMushroom(this, 'Thầy cô ơi, 11A2 yêu thầy cô rất nhiều! 🍄')" tabindex="0" title="Cây nấm đỏ ấm áp">
+                    <svg width="24" height="30" viewBox="0 0 24 30">
+                      <rect x="9" y="16" width="6" height="14" rx="2" fill="#ebd8bf"/>
+                      <ellipse cx="12" cy="14" rx="11" ry="8.5" fill="#d32f2f"/>
+                      <circle cx="7" cy="11" r="1.8" fill="#fff"/>
+                      <circle cx="14" cy="9" r="1.6" fill="#fff"/>
+                      <circle cx="17" cy="13" r="1.4" fill="#fff"/>
+                    </svg>
+                  </div>
+
+                  <!-- M2: Golden Chanterelle -->
+                  <div class="mushroom-node" id="mushroom-2" style="left: 17%; bottom: 4px;" onclick="handleMushroom(this, 'Chúc thầy cô luôn bình an và vui khỏe mỗi ngày! ☀️')" tabindex="0" title="Cây nấm vàng tươi vui">
+                    <svg width="22" height="28" viewBox="0 0 22 28">
+                      <rect x="8" y="14" width="6" height="14" rx="2" fill="#ebd8bf"/>
+                      <ellipse cx="11" cy="12" rx="10" ry="7" fill="#f57f17"/>
+                      <circle cx="8" cy="10" r="1.4" fill="#fff9c4"/>
+                      <circle cx="14" cy="9" r="1.4" fill="#fff9c4"/>
+                    </svg>
+                  </div>
+
+                  <!-- M3: Brown Forest Cap -->
+                  <div class="mushroom-node" id="mushroom-3" style="left: 62%; bottom: 4px;" onclick="handleMushroom(this, 'Cảm ơn thầy cô đã luôn kiên nhẫn dạy dỗ tụi em! 🤎')" tabindex="0" title="Cây nấm nâu bền bỉ">
+                    <svg width="20" height="26" viewBox="0 0 20 26">
+                      <rect x="7" y="13" width="6" height="13" rx="2" fill="#d7ccc8"/>
+                      <ellipse cx="10" cy="11" rx="9" ry="6.5" fill="#6d4c41"/>
+                      <ellipse cx="10" cy="10" rx="6" ry="3.5" fill="#8d6e63"/>
+                    </svg>
+                  </div>
+
+                  <!-- M4: Coral Orange -->
+                  <div class="mushroom-node" id="mushroom-4" style="left: 74%; bottom: 4px;" onclick="handleMushroom(this, 'Thầy cô là người thắp sáng những ước mơ! 🌟')" tabindex="0" title="Cây nấm cam nhiệt huyết">
+                    <svg width="24" height="30" viewBox="0 0 24 30">
+                      <rect x="9" y="15" width="6" height="15" rx="2" fill="#ebd8bf"/>
+                      <ellipse cx="12" cy="13" rx="11" ry="8" fill="#e65100"/>
+                      <circle cx="8" cy="10" r="1.6" fill="#ffe0b2"/>
+                      <circle cx="16" cy="10" r="1.6" fill="#ffe0b2"/>
+                    </svg>
+                  </div>
+
+                  <!-- M5: SECRET FAIRY MUSHROOM (Easter Egg) -->
+                  <div class="mushroom-node easter-mushroom" id="mushroom-5" style="left: 42%; bottom: 5px;" onclick="handleMushroom(this, '🎉 BÍ MẬT 11A2: Dù mai này khôn lớn bay xa, tụi em mãi là học trò của Thầy Cô! Cảm ơn Thầy Cô vì tất cả ❤️')" tabindex="0" title="Cây nấm tím ma thuật (Bí mật!)">
+                    <div class="mushroom-secret-sparkle">✨</div>
+                    <svg width="24" height="30" viewBox="0 0 24 30">
+                      <rect x="9" y="15" width="6" height="15" rx="2" fill="#e1bee7"/>
+                      <ellipse cx="12" cy="13" rx="11" ry="8" fill="#7b1fa2"/>
+                      <circle cx="7" cy="10" r="1.5" fill="#f3e5f5"/>
+                      <circle cx="15" cy="9" r="1.5" fill="#f3e5f5"/>
+                      <circle cx="12" cy="14" r="1.2" fill="#ffd54f"/>
+                    </svg>
+                  </div>
+
+                  <!-- M6: Pink Bonnet -->
+                  <div class="mushroom-node" id="mushroom-6" style="left: 88%; bottom: 4px;" onclick="handleMushroom(this, 'Kỷ niệm 11A2 sẽ mãi vẹn nguyên trong tim! 🌸')" tabindex="0" title="Cây nấm hồng dịu dàng">
+                    <svg width="22" height="28" viewBox="0 0 22 28">
+                      <rect x="8" y="14" width="6" height="14" rx="2" fill="#f8bbd0"/>
+                      <ellipse cx="11" cy="12" rx="10" ry="7" fill="#d81b60"/>
+                      <circle cx="7" cy="9" r="1.5" fill="#fff"/>
+                      <circle cx="15" cy="9" r="1.5" fill="#fff"/>
+                    </svg>
+                  </div>
+                </div><!-- end mushrooms-row -->
+
+                <!-- Delicate Fluttering Butterfly -->
+                <div class="flying-butterfly" aria-hidden="true">
+                  <svg width="24" height="18" viewBox="0 0 24 18">
+                    <g class="wing-left"><ellipse cx="6" cy="8" rx="5.5" ry="7.5" fill="#ff4081" opacity="0.85"/></g>
+                    <g class="wing-right"><ellipse cx="18" cy="8" rx="5.5" ry="7.5" fill="#ff4081" opacity="0.85"/></g>
+                    <ellipse cx="12" cy="9" rx="1.5" ry="7" fill="#311b92"/>
+                  </svg>
+                </div>
+
+              </div><!-- end ground-sanctuary -->
+
+            </div><!-- end tree-canvas-box -->
 
           </div><!-- end tree-stage -->
 
