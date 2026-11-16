@@ -1,6 +1,6 @@
 /**
  * AUDIO.JS - Quản lý âm thanh Web Audio API & Trình phát nhạc nền
- * Class 11A2 - Tri Ân Thầy Long
+ * Class 11A2 - Tri Ân Thầy Cô
  */
 
 // ============================================================

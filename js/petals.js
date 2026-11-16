@@ -1,6 +1,6 @@
 /**
  * PETALS.JS - Hiệu ứng cánh hoa rơi (Canvas) & Pháo hoa cánh hoa khi click
- * Class 11A2 - Tri Ân Thầy Long
+ * Class 11A2 - Tri Ân Thầy Cô
  */
 
 //  10. FALLING PETALS CANVAS ANIMATION

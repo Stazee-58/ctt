@@ -1,6 +1,6 @@
 /* ============================================================
    STYLE.CSS - Giao Diện & Hiệu Ứng Sổ Kỷ Niệm 11A2
-   Tri Ân Thầy Long - Niên Khóa 2026–2027
+   Tri Ân Thầy Cô - Niên Khóa 2026–2027
    ============================================================ */
 
 /* ============================================================
@@ -944,27 +944,34 @@ body.night-mode .tree-title {
   position: relative;
   min-height: 500px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   width: 100%;
+}
+
+/* Tree Canvas Box: Preserves exact 1:1 square aspect ratio across all viewports */
+.tree-canvas-box {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  aspect-ratio: 1 / 1;
+  margin: 0 auto;
 }
 
 /* Unified Botanical Memory Tree SVG */
 .botanical-tree-svg {
   width: 100%;
-  max-width: 520px;
   height: 100%;
   position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  inset: 0;
   pointer-events: none;
   z-index: 2;
   overflow: visible;
   filter: drop-shadow(0 8px 18px rgba(35, 17, 5, 0.25));
 }
 
-/* Organic Foliage & Bough Sway Animations */
+/* Organic Foliage & Bough Sway Animations (Subtle & Anchored) */
 .canopy-sway-1 {
   animation: swayLeaves1 6.5s ease-in-out infinite alternate;
   transform-origin: 250px 250px;
@@ -981,18 +988,18 @@ body.night-mode .tree-title {
 }
 
 @keyframes swayLeaves1 {
-  0% { transform: rotate(0deg) scale(1); }
-  100% { transform: rotate(1.2deg) scale(1.012); }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(0.8deg); }
 }
 
 @keyframes swayLeaves2 {
   0% { transform: rotate(0deg); }
-  100% { transform: rotate(-1.5deg); }
+  100% { transform: rotate(-0.8deg); }
 }
 
 @keyframes swayLeaves3 {
   0% { transform: rotate(0deg); }
-  100% { transform: rotate(2deg); }
+  100% { transform: rotate(1deg); }
 }
 
 /* ============================================================
@@ -1001,7 +1008,10 @@ body.night-mode .tree-title {
 .blossoms-layer {
   position: absolute;
   inset: 0;
+  width: 100%;
+  height: 100%;
   z-index: 20;
+  pointer-events: none;
 }
 
 .blossom-node {
@@ -1013,6 +1023,7 @@ body.night-mode .tree-title {
   transform: translate(-50%, -50%);
   transition: transform 0.35s var(--ease-spring);
   outline: none;
+  pointer-events: auto;
 }
 
 .blossom-node:hover {

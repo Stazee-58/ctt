@@ -1,6 +1,6 @@
 /**
  * MAIN.JS - Logic Tương Tác Sổ Kỷ Niệm 11A2
- * Tri Ân Thầy Long - Niên Khóa 2026–2027
+ * Tri Ân Thầy Cô - Niên Khóa 2026–2027
  */
 
 // ============================================================
@@ -46,9 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (node) {
         const tag = node.querySelector('.blossom-tag');
         if (tag && idx !== 11) {
-          tag.textContent = wish.name;
+          tag.textContent = (idx === 0) ? "Hiểu Minh" : "11A2";
         }
-        node.setAttribute('aria-label', `Lời chúc của ${wish.name}`);
+        node.setAttribute('aria-label', `Lời chúc từ ${wish.name}`);
       }
     });
   }
@@ -211,7 +211,7 @@ function openLightbox(type) {
   } else {
     img.src = CONFIG.teacherPhotoSrc;
     img.alt = CONFIG.teacherName;
-    cap.textContent = `${CONFIG.teacherName} – Giáo viên chủ nhiệm ${CONFIG.className}`;
+    cap.textContent = `Tri ân Thầy Cô kính yêu – Tập thể ${CONFIG.className} ❤️`;
   }
 
   box.classList.add('visible');
