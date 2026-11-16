@@ -14,10 +14,6 @@ const CONFIG = {
   className: "11A2",                       // Lớp 11A2
   schoolYear: "2026–2027",                 // Niên khóa
   logoSrc: "thptkd.png",                   // Logo trường
-  classPhotoSrc: "class.jpg",              // Ảnh tập thể lớp 11A2
-  teacherPhotoSrc: "teacher.jpg",          // Ảnh kỷ niệm thầy cô
-  videoSrc: "video.mp4",                   // Video kỷ niệm
-  videoPoster: "poster.jpg",               // Ảnh bìa video
   musicSrc: "music.mp3",                   // Nhạc nền (tùy chọn)
   wishes: [
     {

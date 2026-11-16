@@ -23,19 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const logoEl = document.getElementById('school-logo');
   if (logoEl) logoEl.src = CONFIG.logoSrc;
 
-  const classImg = document.getElementById('class-photo');
-  if (classImg) classImg.src = CONFIG.classPhotoSrc;
-
-  const teacherImg = document.getElementById('teacher-photo');
-  if (teacherImg) teacherImg.src = CONFIG.teacherPhotoSrc;
-
-  const videoEl = document.getElementById('main-video');
-  if (videoEl) {
-    const src = videoEl.querySelector('source');
-    if (src) src.src = CONFIG.videoSrc;
-    if (CONFIG.videoPoster) videoEl.poster = CONFIG.videoPoster;
-  }
-
   const musicEl = document.getElementById('bg-music');
   if (musicEl) musicEl.src = CONFIG.musicSrc;
 
@@ -209,72 +196,12 @@ function highlightBlossom(idx) {
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
     closeWish();
-    closeLightbox();
-    closeVideoModal();
   }
   if (isWishOpen) {
     if (e.key === 'ArrowRight') { e.preventDefault(); nextWish(); }
     if (e.key === 'ArrowLeft')  { e.preventDefault(); prevWish(); }
   }
 });
-
-// ============================================================
-// 4. PHOTO LIGHTBOX MODAL
-// ============================================================
-function openLightbox(type) {
-  const box = document.getElementById('lightbox');
-  const bdrop = document.getElementById('lightbox-backdrop');
-  const img = document.getElementById('lightbox-img');
-  const cap = document.getElementById('lightbox-caption');
-
-  if (type === 'class') {
-    img.src = CONFIG.classPhotoSrc;
-    img.alt = `Tập thể lớp ${CONFIG.className}`;
-    cap.textContent = `Tập thể ${CONFIG.className} – Niên khóa ${CONFIG.schoolYear} ❤️`;
-  } else {
-    img.src = CONFIG.teacherPhotoSrc;
-    img.alt = CONFIG.teacherName;
-    cap.textContent = `Tri ân Thầy Cô kính yêu – Tập thể ${CONFIG.className} ❤️`;
-  }
-
-  box.classList.add('visible');
-  bdrop.classList.add('visible');
-  document.body.style.overflow = 'hidden';
-  playChime(520);
-}
-
-function closeLightbox() {
-  const box = document.getElementById('lightbox');
-  const bdrop = document.getElementById('lightbox-backdrop');
-  if (box) box.classList.remove('visible');
-  if (bdrop) bdrop.classList.remove('visible');
-  document.body.style.overflow = '';
-}
-
-// ============================================================
-// 5. VIDEO CINEMA MODAL
-// ============================================================
-function openVideoModal() {
-  const modal = document.getElementById('video-modal');
-  const bdrop = document.getElementById('video-backdrop');
-  if (modal) modal.classList.add('visible');
-  if (bdrop) bdrop.classList.add('visible');
-  document.body.style.overflow = 'hidden';
-  playChime(540);
-}
-
-function closeVideoModal() {
-  const modal = document.getElementById('video-modal');
-  const bdrop = document.getElementById('video-backdrop');
-  const video = document.getElementById('main-video');
-  if (modal) modal.classList.remove('visible');
-  if (bdrop) bdrop.classList.remove('visible');
-  document.body.style.overflow = '';
-  if (video) {
-    video.pause();
-    video.currentTime = 0;
-  }
-}
 
 // ============================================================
 // 6. FAIRY MUSHROOMS & SECRET EASTER EGG

@@ -647,223 +647,104 @@ body.night-mode .callout-poem {
   font-style: italic;
 }
 
-/* Keepsakes Scrapbook Gallery */
-.scrapbook-keepsakes {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+/* Wishes Invitation Box on Memorial Letter */
+.wishes-invitation-box {
+  margin: 18px 0;
+  padding: 14px 18px;
+  background: linear-gradient(135deg, rgba(255, 245, 230, 0.75), rgba(248, 232, 206, 0.5));
+  border: 1px dashed var(--gold-primary);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
   gap: 14px;
-  margin-top: 14px;
-  position: relative;
+  box-shadow: 0 4px 12px rgba(44, 20, 5, 0.05);
 }
 
-.keepsake-item {
-  position: relative;
-  cursor: pointer;
-  transition: transform 0.3s var(--ease-spring), box-shadow 0.3s ease;
+body.night-mode .wishes-invitation-box {
+  background: linear-gradient(135deg, rgba(20, 35, 55, 0.75), rgba(25, 45, 70, 0.5));
+  border-color: rgba(144, 202, 249, 0.4);
 }
 
-/* Washi Tape styling */
-.washi-tape {
-  position: absolute;
-  top: -8px;
-  width: 44px;
-  height: 16px;
-  background: rgba(230, 200, 150, 0.7);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-  border-left: 2px dashed rgba(255, 255, 255, 0.5);
-  border-right: 2px dashed rgba(255, 255, 255, 0.5);
-  z-index: 10;
+.invitation-icon {
+  font-size: 2.2rem;
+  line-height: 1;
+  filter: drop-shadow(0 2px 6px rgba(233, 30, 99, 0.3));
 }
 
-.washi-left {
-  left: 20%;
-  transform: rotate(-5deg);
+.invitation-content {
+  flex: 1;
 }
 
-.washi-right {
-  right: 20%;
-  transform: rotate(4deg);
+.invitation-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  margin-bottom: 4px;
 }
 
-/* Polaroid Card */
-.polaroid-card {
-  transform: rotate(-2.5deg);
+body.night-mode .invitation-title {
+  color: #e6f1ff;
 }
 
-.polaroid-card:hover {
-  transform: rotate(0deg) scale(1.05) translateY(-4px);
-  z-index: 20;
+.invitation-desc {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--text-main);
+  margin: 0;
 }
 
-.polaroid-inner {
-  background: #ffffff;
-  padding: 8px 8px 12px;
-  border-radius: 3px;
-  box-shadow: 0 8px 20px rgba(44, 20, 5, 0.25);
-  border: 1px solid rgba(0, 0, 0, 0.08);
+/* Letter Sign-off with Red Wax Seal */
+.letter-sign-off {
+  margin-top: 22px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(138, 90, 43, 0.18);
 }
 
-.photo-box {
-  width: 100%;
-  height: 95px;
-  background: #ede4d3;
-  overflow: hidden;
-  border-radius: 2px;
+body.night-mode .letter-sign-off {
+  border-top-color: rgba(144, 202, 249, 0.2);
+}
+
+.seal-mark {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #e53935, #8e0000);
+  color: #fff;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 800;
+  font-size: 0.8rem;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.photo-box img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.4s ease;
-}
-
-.polaroid-card:hover .photo-box img {
-  transform: scale(1.08);
-}
-
-.photo-fallback {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  color: var(--wood-bark);
-}
-
-.fallback-icon {
-  font-size: 1.4rem;
-}
-
-.fallback-text {
-  font-size: 0.72rem;
-  font-weight: 600;
-}
-
-.polaroid-caption {
-  font-family: 'Caveat', cursive;
-  font-size: 1.05rem;
-  font-weight: 700;
-  text-align: center;
-  color: #3b200e;
-  margin-top: 6px;
-}
-
-/* Teacher Portrait Card */
-.teacher-card {
-  transform: rotate(2deg);
-}
-
-.teacher-card:hover {
-  transform: rotate(0deg) scale(1.05) translateY(-4px);
-  z-index: 20;
-}
-
-.portrait-inner {
-  background: #ffffff;
-  padding: 8px 8px 12px;
-  border-radius: 3px;
-  box-shadow: 0 8px 20px rgba(44, 20, 5, 0.25);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-.portrait-box {
-  width: 100%;
-  height: 95px;
-  background: #ede4d3;
-  overflow: hidden;
-  border-radius: 2px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.portrait-box img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.4s ease;
-}
-
-.teacher-card:hover .portrait-box img {
-  transform: scale(1.08);
-}
-
-.portrait-caption {
-  font-family: 'Caveat', cursive;
-  font-size: 1.05rem;
-  font-weight: 700;
-  text-align: center;
-  color: #3b200e;
-  margin-top: 6px;
-}
-
-/* Cinema Memory Ticket */
-.cinema-ticket {
-  grid-column: span 2;
-  background: linear-gradient(135deg, #44240d 0%, #2a1406 100%);
-  border: 1px solid var(--gold-primary);
-  border-radius: 8px;
-  padding: 10px 14px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
-  margin-top: 4px;
-  transform: rotate(-0.5deg);
-}
-
-.cinema-ticket:hover {
-  transform: scale(1.02) translateY(-2px);
-  box-shadow: 0 8px 24px var(--gold-glow);
-}
-
-.ticket-inner {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.ticket-stub {
-  font-size: 1.5rem;
+  box-shadow: 0 4px 10px rgba(142, 0, 0, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.5px;
   flex-shrink: 0;
 }
 
-.ticket-info {
+.sign-details {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
 }
 
-.ticket-label {
-  font-size: 0.72rem;
+.sign-pre {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.1rem;
+  color: var(--text-muted);
+}
+
+.sign-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
   font-weight: 700;
-  letter-spacing: 1.5px;
-  color: var(--gold-bright);
+  color: var(--text-heading);
 }
 
-.ticket-sub {
-  font-size: 0.82rem;
-  color: rgba(255, 255, 255, 0.85);
-  font-weight: 600;
-}
-
-.ticket-play-badge {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: var(--gold-bright);
-  color: #2a1406;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.8rem;
-  font-weight: 700;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-  transition: transform 0.25s var(--ease-spring);
-}
-
-.cinema-ticket:hover .ticket-play-badge {
-  transform: scale(1.15);
+body.night-mode .sign-name {
+  color: #e6f1ff;
 }
 
 .page-bottom-note {
@@ -1514,155 +1395,7 @@ body.night-mode .tree-title {
 }
 
 /* ============================================================
-   11. PHOTO LIGHTBOX & VIDEO CINEMA MODALS
-   ============================================================ */
-.photo-lightbox {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.9);
-  max-width: min(720px, 92vw);
-  max-height: 90vh;
-  z-index: 1001;
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.4s var(--ease-spring);
-}
-
-.photo-lightbox.visible {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translate(-50%, -50%) scale(1);
-}
-
-.lightbox-stage {
-  background: #fff;
-  padding: 12px 12px 18px;
-  border-radius: 6px;
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-#lightbox-img {
-  max-width: 100%;
-  max-height: 70vh;
-  object-fit: contain;
-  border-radius: 4px;
-}
-
-.lightbox-caption-text {
-  font-family: 'Caveat', cursive;
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #3b200e;
-  margin-top: 12px;
-}
-
-.lightbox-close-btn {
-  position: absolute;
-  top: -16px;
-  right: -16px;
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background: #b71c1c;
-  color: #fff;
-  border: 2px solid #fff;
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  transition: transform 0.25s ease;
-  z-index: 10;
-}
-
-.lightbox-close-btn:hover {
-  transform: scale(1.15) rotate(90deg);
-}
-
-/* Video Cinema Modal */
-.video-cinema-modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.9);
-  width: min(760px, 94vw);
-  z-index: 1001;
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.4s var(--ease-spring);
-}
-
-.video-cinema-modal.visible {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translate(-50%, -50%) scale(1);
-}
-
-.cinema-bezel {
-  background: linear-gradient(135deg, #371b07, #1c0c03);
-  padding: 16px 16px 14px;
-  border-radius: 12px;
-  border: 2px solid var(--gold-primary);
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.85);
-  position: relative;
-}
-
-.cinema-screen {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  background: #000;
-  border-radius: 6px;
-  overflow: hidden;
-}
-
-.cinema-screen video {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.cinema-caption {
-  text-align: center;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--gold-bright);
-  letter-spacing: 1px;
-  margin-top: 10px;
-}
-
-.cinema-close-btn {
-  position: absolute;
-  top: -16px;
-  right: -16px;
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background: #b71c1c;
-  color: #fff;
-  border: 2px solid #fff;
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  transition: transform 0.25s ease;
-  z-index: 10;
-}
-
-.cinema-close-btn:hover {
-  transform: scale(1.15) rotate(90deg);
-}
-
-/* ============================================================
-   12. PETALS CANVAS & MUSHROOM TOAST
+   11. PETALS CANVAS & MUSHROOM TOAST
    ============================================================ */
 #petals-canvas {
   position: fixed;
@@ -1779,12 +1512,11 @@ body.night-mode .tree-title {
     font-size: 1.05rem;
   }
 
-  .scrapbook-keepsakes {
-    grid-template-columns: 1fr;
-  }
-
-  .cinema-ticket {
-    grid-column: span 1;
+  .wishes-invitation-box {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+    padding: 12px;
   }
 
   .tree-title {
